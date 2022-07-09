@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9C2AE4F5-116F-40AD-B774-0D2316EC6114}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>KorisnickiInterfejs</RootNamespace>
+    <AssemblyName>KorisnickiInterfejs</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\ServerCommunicationException.cs" />
+    <Compile Include="Exceptions\SystemOperationException.cs" />
+    <Compile Include="Faktura\FrmPrikaziFakturu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Faktura\FrmPrikaziFakturu.Designer.cs">
+      <DependentUpon>FrmPrikaziFakturu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Faktura\UCFaktura.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Faktura\UCFaktura.Designer.cs">
+      <DependentUpon>UCFaktura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Faktura\UCSveFakture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Faktura\UCSveFakture.Designer.cs">
+      <DependentUpon>UCSveFakture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogIn.Designer.cs">
+      <DependentUpon>FrmLogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIController\FakturaController\FakturaController.cs" />
+    <Compile Include="GUIController\FakturaController\PrikaziFakturuController.cs" />
+    <Compile Include="GUIController\FakturaController\SveFaktureController.cs" />
+    <Compile Include="GUIController\KorisnikController\KorisnikController.cs" />
+    <Compile Include="GUIController\KorisnikController\PrikaziKorisnikaController.cs" />
+    <Compile Include="GUIController\KorisnikController\SviKorisniciController.cs" />
+    <Compile Include="GUIController\KursController\KursController.cs" />
+    <Compile Include="GUIController\KursController\PrikaziKursController.cs" />
+    <Compile Include="GUIController\KursController\SviKurseviController.cs" />
+    <Compile Include="GUIController\PredavacController\PredavacController.cs" />
+    <Compile Include="GUIController\PredavacController\PrikaziPredavacaController.cs" />
+    <Compile Include="GUIController\PredavacController\SviPredavaciController.cs" />
+    <Compile Include="GUIController\UserController.cs" />
+    <Compile Include="Korisnik\FrmPrikaziKorisnika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Korisnik\FrmPrikaziKorisnika.Designer.cs">
+      <DependentUpon>FrmPrikaziKorisnika.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\UCKorisnik.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Korisnik\UCKorisnik.Designer.cs">
+      <DependentUpon>UCKorisnik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\UCSviKorisnici.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Korisnik\UCSviKorisnici.Designer.cs">
+      <DependentUpon>UCSviKorisnici.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kurs\FrmPrikaziKurs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kurs\FrmPrikaziKurs.Designer.cs">
+      <DependentUpon>FrmPrikaziKurs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kurs\UCKurs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kurs\UCKurs.Designer.cs">
+      <DependentUpon>UCKurs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kurs\UCSviKursevi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Kurs\UCSviKursevi.Designer.cs">
+      <DependentUpon>UCSviKursevi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Predavac\FrmPrikaziPredavaca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Predavac\FrmPrikaziPredavaca.Designer.cs">
+      <DependentUpon>FrmPrikaziPredavaca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Predavac\UCPredavac.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Predavac\UCPredavac.Designer.cs">
+      <DependentUpon>UCPredavac.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Predavac\UCSviPredavaci.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Predavac\UCSviPredavaci.Designer.cs">
+      <DependentUpon>UCSviPredavaci.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerCommunication\Communication.cs" />
+    <Compile Include="Session\Session.cs" />
+    <EmbeddedResource Include="Faktura\FrmPrikaziFakturu.resx">
+      <DependentUpon>FrmPrikaziFakturu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Faktura\UCFaktura.resx">
+      <DependentUpon>UCFaktura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Faktura\UCSveFakture.resx">
+      <DependentUpon>UCSveFakture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogIn.resx">
+      <DependentUpon>FrmLogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Korisnik\FrmPrikaziKorisnika.resx">
+      <DependentUpon>FrmPrikaziKorisnika.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Korisnik\UCKorisnik.resx">
+      <DependentUpon>UCKorisnik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Korisnik\UCSviKorisnici.resx">
+      <DependentUpon>UCSviKorisnici.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kurs\FrmPrikaziKurs.resx">
+      <DependentUpon>FrmPrikaziKurs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kurs\UCKurs.resx">
+      <DependentUpon>UCKurs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kurs\UCSviKursevi.resx">
+      <DependentUpon>UCSviKursevi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Predavac\FrmPrikaziPredavaca.resx">
+      <DependentUpon>FrmPrikaziPredavaca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Predavac\UCPredavac.resx">
+      <DependentUpon>UCPredavac.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Predavac\UCSviPredavaci.resx">
+      <DependentUpon>UCSviPredavaci.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj">
+      <Project>{7A9AF62F-68EA-425A-B557-B07B2866D7AF}</Project>
+      <Name>ApplicationLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{3D56A67C-CE46-4BEE-AEE1-56197F710E89}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{A03422D8-52BB-48EB-A927-24F6D775FF7F}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
