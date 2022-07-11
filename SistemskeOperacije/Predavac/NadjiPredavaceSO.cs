@@ -17,7 +17,7 @@ namespace SistemskeOperacije.Predavac
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.NadjiPredavace(kriterijum);
+            Rezultat = repozitorijum.Pretraga(new Domain.Predavac(), kriterijum).OfType<Domain.Predavac>().ToList();
         }
     }
 }

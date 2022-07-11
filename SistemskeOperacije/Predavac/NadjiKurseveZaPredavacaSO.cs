@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,11 @@ namespace SistemskeOperacije.Predavac
         }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.VratiSveKurseveZaPredavaca(predavac);
+            KursPredavac kp = new KursPredavac { 
+                Predavac= predavac,
+            };
+
+            Rezultat = repozitorijum.VratiSveZaNekog(kp).OfType<Domain.Kurs>().ToList();
         }
     }
 }

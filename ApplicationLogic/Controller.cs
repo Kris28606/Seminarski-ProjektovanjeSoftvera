@@ -1,5 +1,10 @@
 ﻿using Domain;
 using Repository;
+using SistemskeOperacije;
+using SistemskeOperacije.Faktura;
+using SistemskeOperacije.Korisnik;
+using SistemskeOperacije.Kurs;
+using SistemskeOperacije.Predavac;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,16 +17,12 @@ namespace ApplicationLogic
     public class Controller
     {
         private static Controller instance;
-        UserRepozitorijum userRepozitorijum;
-        KursRepozitorijum kursRepozitorijum;
-        PredavacRepozitorijum predavacRepozitorijum;
-        FakturaRepozitorijum fakturaRepozitorijum;
-        KorisnikRepozitorijum korisnikRepozitorijum;
-        MestoRepozitorijum mestoRepozitorijum;
 
         public List<Faktura> VratiSvefakture()
         {
-            return fakturaRepozitorijum.VratiSveFakture();
+            OpstaSO so = new UcitajListuFakturaSO();
+            so.Izvrsi();
+            return ((UcitajListuFakturaSO)so).Rezultat;
         }
 
         public User PrijavljeniKorisnik { get; private set; }
@@ -33,7 +34,9 @@ namespace ApplicationLogic
 
         public List<Kurs> VratiSveKurseve()
         {
-            return kursRepozitorijum.VratiSveKurseve();
+            OpstaSO so = new UcitajListuKursevaSO();
+            so.Izvrsi();
+            return ((UcitajListuKursevaSO)so).Rezultat;
         }
 
         public Array VratiSvePolove()
@@ -43,62 +46,74 @@ namespace ApplicationLogic
 
         public List<Faktura> NadjiFakture(string kriterijum)
         {
-            return fakturaRepozitorijum.NadjiFakture(kriterijum);
+            OpstaSO so = new NadjiFaktureSO(kriterijum);
+            so.Izvrsi();
+            return ((NadjiFaktureSO)so).Rezultat;
         }
 
         public List<Kurs> VratiSveKurseveZaPredavaca(Predavac p)
         {
-            return kursRepozitorijum.VratiSveKurseveZaPredavaca(p);
+            OpstaSO so = new NadjiKurseveZaPredavacaSO(p);
+            so.Izvrsi();
+            return ((NadjiKurseveZaPredavacaSO)so).Rezultat;
         }
 
         public List<Korisnik> VratiSveKorisnike()
         {
-            return korisnikRepozitorijum.VratiSveKorisnike();
+            OpstaSO so = new UcitajListuKorisnikaSO();
+            so.Izvrsi();
+            return ((UcitajListuKorisnikaSO)so).Rezultat;
         }
 
         public void ObrisiKorisnika(Korisnik korisnik)
         {
-            korisnikRepozitorijum.ObrisiKorisnika(korisnik);
+            OpstaSO so = new ObrisiKorisnikaSO(korisnik);
+            so.Izvrsi();
         }
 
         public List<Korisnik> NadjiKorisnika(string kriterijum)
         {
-            return korisnikRepozitorijum.NadjiKorisnika(kriterijum);   
+            OpstaSO so = new NadjiKorisnikeSO(kriterijum);
+            so.Izvrsi();
+            return ((NadjiKorisnikeSO)so).Rezultat;
         }
 
         public List<Mesto> VratiSvaMesta()
         {
-            return mestoRepozitorijum.VratiSvaMesta();
+            OpstaSO so = new UcitajListuMestaSO();
+            so.Izvrsi();
+            return ((UcitajListuMestaSO)so).Rezultat;
         }
 
         public List<Kurs> VratiSveKurseveZaKorisnika(Korisnik korisnik)
         {
-            return kursRepozitorijum.VratiSveKurseveZaKorisnika(korisnik);
+            OpstaSO so = new NadjiKurseveZaKorisnikaSO(korisnik);
+            so.Izvrsi();
+            return ((NadjiKurseveZaKorisnikaSO)so).Rezultat;
         }
 
         public void StornirajFakturu(Faktura faktura)
         {
-            fakturaRepozitorijum.StornirajFakturu(faktura);
+            OpstaSO so = new StornirajFakturuSO(faktura);
+            so.Izvrsi();
         }
 
         private Controller()
         {
-            userRepozitorijum = new UserRepozitorijum();
-            kursRepozitorijum = new KursRepozitorijum();
-            predavacRepozitorijum = new PredavacRepozitorijum();
-            fakturaRepozitorijum = new FakturaRepozitorijum();
-            korisnikRepozitorijum = new KorisnikRepozitorijum();
-            mestoRepozitorijum = new MestoRepozitorijum();
+            
         }
 
         public List<Predavac> NadjiPredavace(string kriterijum)
         {
-            return predavacRepozitorijum.NadjiPredavace(kriterijum);
+            OpstaSO so = new NadjiPredavaceSO(kriterijum);
+            so.Izvrsi();
+            return ((NadjiPredavaceSO)so).Rezultat;
         }
 
         public void SacuvajKorisnika(Korisnik k)
         {
-            korisnikRepozitorijum.SacuvajKorisnika(k);
+            OpstaSO so = new ZapamtiKorisnikaSO(k);
+            so.Izvrsi();
         }
 
         public static Controller Instance { 
@@ -114,48 +129,53 @@ namespace ApplicationLogic
 
         public List<Predavac> VratiSvePredavace()
         {
-            return predavacRepozitorijum.VratiSvePredavace();
+            OpstaSO so = new UcitajListuPredavacaSO();
+            so.Izvrsi();
+            return ((UcitajListuPredavacaSO)so).Rezultat;
         }
 
         public List<Kurs> NadjiKurseve(string kriterijum)
         {
-            return kursRepozitorijum.NadjiKurseve(kriterijum);
+            OpstaSO so = new NadjiKurseveSO(kriterijum);
+            so.Izvrsi();
+            return ((NadjiKurseveSO)so).Rezultat;
         }
 
         public User LogIn(User user)
         {
-            user = userRepozitorijum.LogIn(user);
-            if(user!=null)
-            {
-                PrijavljeniKorisnik = user;
-                return user;
-            }
-            return null;
+            OpstaSO so = new PrijavaSO(user);
+            so.Izvrsi();
+            return ((PrijavaSO)so).Rezultat;
         }
 
         public void DodajKurs(Kurs k)
         {
-            kursRepozitorijum.DodajKurs(k);
+            OpstaSO so = new ZapamtiKursSO(k);
+            so.Izvrsi();
         }
 
         public void IzmeniKurs(Kurs k)
         {
-            kursRepozitorijum.IzmeniKurs(k);
+            OpstaSO so = new IzmeniKursSO(k);
+            so.Izvrsi();
         }
 
         public void SacuvajFakturu(Faktura faktura)
         {
-            fakturaRepozitorijum.SacuvajFakturu(faktura);
+            OpstaSO so = new ZapamtiFakturuSO(faktura);
+            so.Izvrsi();
         }
 
         public void SacuvajPredavaca(Predavac p)
         {
-            predavacRepozitorijum.SacuvajPredavaca(p);
+            OpstaSO so = new ZapamtiPredavacaSO(p);
+            so.Izvrsi();
         }
 
         public void IzmeniPredavaca(Predavac p)
         {
-            predavacRepozitorijum.IzmeniPredavaca(p);
+            OpstaSO so = new IzmeniPredavacaSO(p);
+            so.Izvrsi();
         }
     }
 }

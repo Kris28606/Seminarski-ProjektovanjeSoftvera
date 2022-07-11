@@ -8,17 +8,23 @@ namespace SistemskeOperacije.Predavac
 {
     public class ZapamtiPredavacaSO : OpstaSO
     {
-        private Domain.Predavac predavac;
+        public Domain.Predavac predavac;
         public ZapamtiPredavacaSO(Domain.Predavac p)
         {
             predavac = p;
         }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            int idPredavac = broker.SacuvajPredavaca(predavac);
+            int idPredavac = repozitorijum.Sacuvaj(predavac);
+            predavac.PredavacId = idPredavac;
             foreach (Domain.Kurs k in predavac.ListaKurseva)
             {
-                broker.SacuvajKursPredavac(k, idPredavac);
+                Domain.KursPredavac kp = new Domain.KursPredavac
+                {
+                    Kurs= k,
+                    Predavac=predavac
+                };
+                repozitorijum.Sacuvaj(kp);
             }
         }
     }

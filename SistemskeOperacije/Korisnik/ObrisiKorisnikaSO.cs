@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,12 @@ namespace SistemskeOperacije.Korisnik
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            broker.ObrisiKorisnika(korisnik);
+            KursKorisnik kk = new KursKorisnik
+            {
+                Korisnik = korisnik
+            };
+            repozitorijum.Izbrisi(kk);
+            repozitorijum.Izbrisi(korisnik);
         }
     }
 }

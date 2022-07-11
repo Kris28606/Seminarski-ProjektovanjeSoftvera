@@ -16,7 +16,7 @@ namespace SistemskeOperacije
         }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            broker.DodajKurs(kurs);
+            repozitorijum.Sacuvaj(kurs);
         }
     }
 }

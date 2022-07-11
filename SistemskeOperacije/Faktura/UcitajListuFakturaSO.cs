@@ -11,7 +11,7 @@ namespace SistemskeOperacije.Faktura
         public List<Domain.Faktura> Rezultat { get; private set; }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.VratiSveFakture();
+            Rezultat = repozitorijum.VratiSve(new Domain.Faktura()).OfType<Domain.Faktura>().ToList();
         }
     }
 }

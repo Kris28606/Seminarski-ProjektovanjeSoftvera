@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Faktura.cs" />
+    <Compile Include="IOpstiObjekat.cs" />
     <Compile Include="Korisnik.cs" />
     <Compile Include="Kurs.cs" />
+    <Compile Include="KursKorisnik.cs" />
+    <Compile Include="KursPredavac.cs" />
     <Compile Include="Mesto.cs" />
     <Compile Include="NacinPlacanja.cs" />
     <Compile Include="Pol.cs" />

@@ -11,7 +11,7 @@ namespace SistemskeOperacije.Predavac
         public List<Domain.Predavac> Rezultat { get; private set; }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            throw new NotImplementedException();
+            Rezultat = repozitorijum.VratiSve(new Domain.Predavac()).OfType<Domain.Predavac>().ToList();
         }
     }
 }

@@ -8,11 +8,11 @@ namespace SistemskeOperacije.Kurs
 {
     public class UcitajListuKursevaSO : OpstaSO
     {
-        public List<Domain.Predavac> Rezultat { get; private set; }
+        public List<Domain.Kurs> Rezultat { get; private set; }
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.VratiSvePredavace();
+            Rezultat = repozitorijum.VratiSve(new Domain.Kurs()).OfType<Domain.Kurs>().ToList();
         }
     }
 }

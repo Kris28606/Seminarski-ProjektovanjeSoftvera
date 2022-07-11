@@ -17,7 +17,7 @@ namespace SistemskeOperacije.Faktura
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.NadjiFakture(kriterijum);
+            Rezultat = repozitorijum.Pretraga(new Domain.Faktura(), kriterijum).OfType<Domain.Faktura>().ToList();
         }
     }
 }

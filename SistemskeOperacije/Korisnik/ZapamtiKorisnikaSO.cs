@@ -16,11 +16,11 @@ namespace SistemskeOperacije.Korisnik
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            int idKorisnika = broker.SacuvajKorisnika(korisnik);
+            int idKorisnika = repozitorijum.Sacuvaj(korisnik);
 
             foreach (Domain.Kurs kurs in korisnik.ListaKurseva)
             {
-                broker.SacuvajKursKorisnik(kurs, idKorisnika);
+                //repozitorijum.SacuvajKursKorisnik(kurs, idKorisnika);
             }
         }
     }

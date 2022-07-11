@@ -30,7 +30,7 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
         {
             try
             {
-                faktura.CbNacinPlacanja.DataSource = Enum.GetValues(typeof(Domain.NacinPlacanja));
+                faktura.CbNacinPlacanja.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat<Domain.NacinPlacanja[]>(Operacija.UcitajSveNacinePlacanja);
                 faktura.CbKorisnik.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.UcitajListuKorisnika);
                 faktura.CbKurs.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.NadjiKurseveZaKorisnika, (Domain.Korisnik)faktura.CbKorisnik.SelectedItem);
                 faktura.CbKurs.DisplayMember = "Naziv";

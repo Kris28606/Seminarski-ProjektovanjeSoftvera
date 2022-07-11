@@ -32,6 +32,8 @@ namespace Common
         NadjiFakture,
         UcitajFakturu,
         StornirajFakturu,
-        Kraj
+        Kraj,
+        UcitajSvePolove,
+        UcitajSveNacinePlacanja
     }
 }

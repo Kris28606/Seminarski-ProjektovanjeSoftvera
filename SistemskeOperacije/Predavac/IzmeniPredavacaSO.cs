@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,11 +16,17 @@ namespace SistemskeOperacije.Predavac
         }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            broker.IzmeniPredavaca(predavac);
-            broker.ObrisiKurseveZaPredavaca(predavac);
+            repozitorijum.Izmeni(predavac);
+            KursPredavac kp = new KursPredavac
+            {
+                Predavac = predavac
+            };
+            repozitorijum.Izbrisi(kp);
+
             foreach (Domain.Kurs k in predavac.ListaKurseva)
             {
-                broker.SacuvajKursPredavac(k, predavac.PredavacId);
+                kp.Kurs = k;
+                repozitorijum.Sacuvaj(kp);
             }
         }
     }

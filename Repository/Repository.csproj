@@ -41,13 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FakturaRepozitorijum.cs" />
-    <Compile Include="KorisnikRepozitorijum.cs" />
-    <Compile Include="KursRepozitorijum.cs" />
-    <Compile Include="MestoRepozitorijum.cs" />
-    <Compile Include="PredavacRepozitorijum.cs" />
+    <Compile Include="GenerickiRepozitorijum\GenerickiRepozitorijum.cs" />
+    <Compile Include="GenerickiRepozitorijum\IRepozitorijum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserRepozitorijum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DatabaseBroker\DatabaseBroker.csproj">

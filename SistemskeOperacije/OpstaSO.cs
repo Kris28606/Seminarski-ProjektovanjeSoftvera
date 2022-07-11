@@ -1,4 +1,6 @@
-﻿using DatabaseBroker;
+﻿using Domain;
+using Repository;
+using Repository.GenerickiRepozitorijum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,26 +11,26 @@ namespace SistemskeOperacije
 {
     public abstract class OpstaSO
     {
-        protected Broker broker = new Broker();
-
+        protected IRepozitorijum<IOpstiObjekat> repozitorijum = new GenerickiRepozitorijum();
         public void Izvrsi()
         {
             try
             {
-                broker.OpenConnection();
-                broker.BeginTransakcion();
+                repozitorijum.OtvoriKonekciju();
+                repozitorijum.ZapocniTransakciju();
 
                 IzvrsiKonkretnuOperaciju();
 
-                broker.Commit();
+                repozitorijum.Commit();
             }
             catch (Exception es)
             {
-                broker.Rollback();
+                repozitorijum.RollBack();
+                throw;
             }
             finally
             {
-                broker.CloseConnection();
+                repozitorijum.ZatvoriKonekciju();
             }
         }
 

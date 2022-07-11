@@ -16,12 +16,12 @@ namespace SistemskeOperacije.Faktura
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            int idFakture = broker.SacuvajFakturu(faktura);
+            int idFakture = repozitorijum.Sacuvaj(faktura);
 
             foreach (Domain.StavkaFakture sf in faktura.Stavke)
             {
                 sf.FakturaId = idFakture;
-                broker.SacuvajStavkuFakture(sf);
+                repozitorijum.Sacuvaj(sf);
             }
         }
     }

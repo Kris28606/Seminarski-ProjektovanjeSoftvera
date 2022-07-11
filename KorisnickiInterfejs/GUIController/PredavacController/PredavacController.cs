@@ -31,7 +31,7 @@ namespace KorisnickiInterfejs.GUIController.Predavac
             {
                 predavac.CbKurs.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat< List<Domain.Kurs> >(Operacija.UcitajListuKurseva);
                 predavac.CbKurs.DisplayMember = "Naziv";
-                predavac.CbGender.DataSource = Enum.GetValues(typeof(Domain.Pol));
+                predavac.CbGender.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat<Domain.Pol[]>(Operacija.UcitajSvePolove);
                 predavac.DgvKursevi.DataSource = kursevi;
                 predavac.DgvKursevi.Columns["KursId"].Visible = false;
             }

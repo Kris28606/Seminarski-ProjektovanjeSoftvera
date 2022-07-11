@@ -11,7 +11,7 @@ namespace SistemskeOperacije
         public List<Domain.Mesto> Rezultat { get; private set; }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.VratiSvaMesta();
+            Rezultat = repozitorijum.VratiSve(new Domain.Mesto()).OfType<Domain.Mesto>().ToList();
         }
     }
 }

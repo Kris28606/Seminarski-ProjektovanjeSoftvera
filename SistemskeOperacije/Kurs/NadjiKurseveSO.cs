@@ -19,7 +19,7 @@ namespace SistemskeOperacije.Kurs
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.NadjiKurseve(kriterijum);
+            Rezultat = repozitorijum.Pretraga(new Domain.Kurs(), kriterijum).OfType<Domain.Kurs>().ToList();
         }
     }
 }

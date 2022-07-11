@@ -138,6 +138,10 @@ namespace KorisnickiInterfejs.GUIController.Predavac
                 predavac.TxtLastName.BackColor = Color.LightGreen;
                 nijeDobro = true;
             }
+            if(kursevi.Count==0)
+            {
+                nijeDobro = true;
+            }
             return nijeDobro;
         }
 

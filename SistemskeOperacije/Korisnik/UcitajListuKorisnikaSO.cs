@@ -11,7 +11,7 @@ namespace SistemskeOperacije.Korisnik
         public List<Domain.Korisnik> Rezultat { get; private set; }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.VratiSveKorisnike();
+            Rezultat = repozitorijum.VratiSve(new Domain.Korisnik()).OfType<Domain.Korisnik>().ToList();
         }
     }
 }

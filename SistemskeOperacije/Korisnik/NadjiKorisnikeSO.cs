@@ -17,7 +17,7 @@ namespace SistemskeOperacije.Korisnik
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.NadjiKorisnike(kriterijum);
+            Rezultat = repozitorijum.Pretraga(new Domain.Korisnik(), kriterijum).OfType<Domain.Korisnik>().ToList();
         }
     }
 }

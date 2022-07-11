@@ -17,7 +17,100 @@ namespace DatabaseBroker
         {
             connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SeminarskiPS;Integrated Security=True;");
         }
+        public List<Kurs> VratiSveKurseveZaKorisnika(Korisnik korisnik)
+        {
+            List<Kurs> kursevi = new List<Kurs>();
 
+            SqlCommand command = new SqlCommand("", connection);
+            command.Transaction = transaction;
+            command.CommandText = $"select * from Kurs k join KursKorisnik kk on (k.KursId=kk.KursId) where kk.KorisnikId={korisnik.KorisnikId}";
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Kurs k = new Kurs
+                {
+                    KursId = (int)reader[0],
+                    Naziv = reader[1].ToString(),
+                    DatumPocetka = DateTime.Parse(reader[3].ToString()),
+                    Cena = (double)reader[2],
+                    Trajanje = (int)reader[4]
+                };
+
+                kursevi.Add(k);
+
+            }
+            reader.Close();
+
+            return kursevi;
+        }
+        public void SacuvajKursPredavac(Kurs k, int idPredavac)
+        {
+            SqlCommand command = new SqlCommand("", connection);
+            command.Transaction = transaction;
+            command.CommandText = $"insert into KursPredavac values (@KursId, @PredavacId)";
+
+            command.Parameters.AddWithValue("@KursId", k.KursId);
+            command.Parameters.AddWithValue("@PredavacId", idPredavac);
+
+            command.ExecuteNonQuery();
+        }
+
+        public void SacuvajKursKorisnik(Kurs kurs, int idKorisnika)
+        {
+            SqlCommand command = new SqlCommand("", connection);
+            command.Transaction = transaction;
+            command.CommandText = $"insert into KursKorisnik values (@KursId, @KorisnikId)";
+
+            command.Parameters.AddWithValue("@KursId", kurs.KursId);
+            command.Parameters.AddWithValue("@KorisnikId", idKorisnika);
+
+            command.ExecuteNonQuery();
+        }
+        public List<Kurs> VratiSveKurseveZaPredavaca(Predavac p)
+        {
+            List<Kurs> kursevi = new List<Kurs>();
+
+            SqlCommand command = new SqlCommand("", connection);
+            command.Transaction = transaction;
+            command.CommandText = $"select * from Kurs k join KursPredavac kp on (k.KursId=kp.KursId) where kp.PredavacId={p.PredavacId}";
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Kurs k = new Kurs
+                {
+                    KursId = (int)reader[0],
+                    Naziv = reader[1].ToString(),
+                    DatumPocetka = DateTime.Parse(reader[3].ToString()),
+                    Cena = (double)reader[2],
+                    Trajanje = (int)reader[4]
+                };
+
+                kursevi.Add(k);
+
+            }
+            reader.Close();
+
+            return kursevi;
+        }
+        public SqlCommand KreirajKomandu()
+        {
+            SqlCommand command = new SqlCommand("", connection, transaction);
+            return command;
+        }
+        public void ObrisiKurseveZaPredavaca(Predavac p)
+        {
+            SqlCommand command = new SqlCommand("", connection);
+            command.Transaction = transaction;
+            command.CommandText = $"delete from KursPredavac where PredavacId={p.PredavacId}";
+
+            command.ExecuteNonQuery();
+        }
+
+        #region
         public List<Mesto> VratiSvaMesta()
         {
             List<Mesto> mesta = new List<Mesto>();
@@ -39,6 +132,8 @@ namespace DatabaseBroker
             reader.Close();
             return mesta;
         }
+
+        
 
         public List<Faktura> VratiSveFakture()
         {
@@ -73,14 +168,7 @@ namespace DatabaseBroker
             return fakture;
         }
 
-        public void ObrisiKurseveZaPredavaca(Predavac p)
-        {
-            SqlCommand command = new SqlCommand("", connection);
-            command.Transaction = transaction;
-            command.CommandText = $"delete from KursPredavac where PredavacId={p.PredavacId}";
-
-            command.ExecuteNonQuery();
-        }
+        
 
         public void IzmeniPredavaca(Predavac p)
         {
@@ -125,34 +213,7 @@ namespace DatabaseBroker
             return predavaci;
         }
 
-        public List<Kurs> VratiSveKurseveZaPredavaca(Predavac p)
-        {
-            List<Kurs> kursevi = new List<Kurs>();
-
-            SqlCommand command = new SqlCommand("", connection);
-            command.Transaction = transaction;
-            command.CommandText = $"select * from Kurs k join KursPredavac kp on (k.KursId=kp.KursId) where kp.PredavacId={p.PredavacId}";
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Kurs k = new Kurs
-                {
-                    KursId = (int)reader[0],
-                    Naziv = reader[1].ToString(),
-                    DatumPocetka = DateTime.Parse(reader[3].ToString()),
-                    Cena = (double)reader[2],
-                    Trajanje = (int)reader[4]
-                };
-
-                kursevi.Add(k);
-
-            }
-            reader.Close();
-
-            return kursevi;
-        }
+        
 
         public void ObrisiKorisnika(Korisnik korisnik)
         {
@@ -237,29 +298,7 @@ namespace DatabaseBroker
             return fakture;
         }
 
-        public void SacuvajKursPredavac(Kurs k, int idPredavac)
-        {
-            SqlCommand command = new SqlCommand("", connection);
-            command.Transaction = transaction;
-            command.CommandText = $"insert into KursPredavac values (@KursId, @PredavacId)";
-
-            command.Parameters.AddWithValue("@KursId", k.KursId);
-            command.Parameters.AddWithValue("@PredavacId", idPredavac);
-
-            command.ExecuteNonQuery();
-        }
-
-        public void SacuvajKursKorisnik(Kurs kurs, int idKorisnika)
-        {
-            SqlCommand command = new SqlCommand("", connection);
-            command.Transaction = transaction;
-            command.CommandText = $"insert into KursKorisnik values (@KursId, @KorisnikId)";
-
-            command.Parameters.AddWithValue("@KursId", kurs.KursId);
-            command.Parameters.AddWithValue("@KorisnikId", idKorisnika);
-
-            command.ExecuteNonQuery();
-        }
+        
 
         public int SacuvajKorisnika(Korisnik k)
         {
@@ -309,34 +348,7 @@ namespace DatabaseBroker
             return korisnici;
         }
 
-        public List<Kurs> VratiSveKurseveZaKorisnika(Korisnik korisnik)
-        {
-            List<Kurs> kursevi = new List<Kurs>();
-
-            SqlCommand command = new SqlCommand("", connection);
-            command.Transaction = transaction;
-            command.CommandText = $"select * from Kurs k join KursKorisnik kk on (k.KursId=kk.KursId) where kk.KorisnikId={korisnik.KorisnikId}";
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Kurs k = new Kurs
-                {
-                    KursId = (int)reader[0],
-                    Naziv = reader[1].ToString(),
-                    DatumPocetka = DateTime.Parse(reader[3].ToString()),
-                    Cena = (double)reader[2],
-                    Trajanje = (int)reader[4]
-                };
-
-                kursevi.Add(k);
-
-            }
-            reader.Close();
-
-            return kursevi;
-        }
+        
 
         public List<Kurs> NadjiKurseve(string kriterijum)
         {
@@ -498,7 +510,8 @@ namespace DatabaseBroker
 
             return kursevi;
         }
-
+        #endregion
+        
         public void OpenConnection()
         {
             connection.Open();

@@ -16,7 +16,7 @@ namespace SistemskeOperacije.Faktura
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            broker.StornirajFakturu(faktura);
+            repozitorijum.Izmeni(faktura);
         }
     }
 }

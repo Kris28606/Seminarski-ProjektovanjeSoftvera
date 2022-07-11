@@ -93,7 +93,7 @@ namespace Server
                     break;
 
                 case Operacija.NadjiKurseve:
-                    odgovor.OdgovorObjekat=Controller.Instance.NadjiKurseve((string)zahtev.ZahtevObjekat);
+                    odgovor.OdgovorObjekat = Controller.Instance.NadjiKurseve((string)zahtev.ZahtevObjekat);
                     break;
 
                 case Operacija.UcitajListuKurseva:
@@ -109,7 +109,7 @@ namespace Server
                     break;
 
                 case Operacija.NadjiPredavace:
-                    odgovor.OdgovorObjekat=Controller.Instance.NadjiPredavace((string)zahtev.ZahtevObjekat);
+                    odgovor.OdgovorObjekat = Controller.Instance.NadjiPredavace((string)zahtev.ZahtevObjekat);
                     break;
 
                 case Operacija.UcitajListuMesta:
@@ -162,6 +162,14 @@ namespace Server
 
                 case Operacija.UcitajListuFaktura:
                     odgovor.OdgovorObjekat = Controller.Instance.VratiSvefakture();
+                    break;
+
+                case Operacija.UcitajSvePolove:
+                    odgovor.OdgovorObjekat = Controller.Instance.VratiSvePolove();
+                    break;
+
+                case Operacija.UcitajSveNacinePlacanja:
+                    odgovor.OdgovorObjekat = Controller.Instance.VratiSveNacinePlacanja();
                     break;
             }
             return odgovor;

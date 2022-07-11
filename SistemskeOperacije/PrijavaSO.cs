@@ -19,7 +19,7 @@ namespace SistemskeOperacije
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            Rezultat = broker.LogIn(user);
+            Rezultat = (User)repozitorijum.VratiJedan(user);
         }
     }
 }
