@@ -31,7 +31,7 @@ namespace Domain
                 KursId = (int)reader[0],
                 Naziv = (string)reader[3],
                 Cena = Double.Parse(reader[4].ToString()),
-                DatumPocetka = DateTime.Parse(reader[5].ToString()),
+                DatumPocetka = (DateTime)reader[5],
                 Trajanje = (int)reader[6]
             };
             return k;

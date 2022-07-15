@@ -41,12 +41,13 @@ namespace KorisnickiInterfejs.Predavac
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.cbGender = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnIzbaci = new System.Windows.Forms.Button();
+            this.lblNemaKurseva = new System.Windows.Forms.Label();
+            this.btnDodajKurs = new System.Windows.Forms.Button();
+            this.dgvKursevi = new System.Windows.Forms.DataGridView();
             this.lblDatumGreska = new System.Windows.Forms.Label();
             this.cbKurs = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvKursevi = new System.Windows.Forms.DataGridView();
-            this.btnDodajKurs = new System.Windows.Forms.Button();
-            this.lblNemaKurseva = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKursevi)).BeginInit();
             this.SuspendLayout();
@@ -150,6 +151,7 @@ namespace KorisnickiInterfejs.Predavac
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.BackColor = System.Drawing.Color.Pink;
+            this.groupBox1.Controls.Add(this.btnIzbaci);
             this.groupBox1.Controls.Add(this.lblNemaKurseva);
             this.groupBox1.Controls.Add(this.btnDodajKurs);
             this.groupBox1.Controls.Add(this.dgvKursevi);
@@ -172,6 +174,55 @@ namespace KorisnickiInterfejs.Predavac
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dodaj novog predavaca";
+            // 
+            // btnIzbaci
+            // 
+            this.btnIzbaci.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnIzbaci.BackColor = System.Drawing.Color.Plum;
+            this.btnIzbaci.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIzbaci.Location = new System.Drawing.Point(375, 260);
+            this.btnIzbaci.Name = "btnIzbaci";
+            this.btnIzbaci.Size = new System.Drawing.Size(101, 24);
+            this.btnIzbaci.TabIndex = 25;
+            this.btnIzbaci.Text = "Izbaci";
+            this.btnIzbaci.UseVisualStyleBackColor = false;
+            this.btnIzbaci.Click += new System.EventHandler(this.btnIzbaci_Click);
+            // 
+            // lblNemaKurseva
+            // 
+            this.lblNemaKurseva.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblNemaKurseva.AutoSize = true;
+            this.lblNemaKurseva.Font = new System.Drawing.Font("Mongolian Baiti", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNemaKurseva.ForeColor = System.Drawing.Color.Red;
+            this.lblNemaKurseva.Location = new System.Drawing.Point(203, 273);
+            this.lblNemaKurseva.Name = "lblNemaKurseva";
+            this.lblNemaKurseva.Size = new System.Drawing.Size(0, 14);
+            this.lblNemaKurseva.TabIndex = 24;
+            // 
+            // btnDodajKurs
+            // 
+            this.btnDodajKurs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnDodajKurs.BackColor = System.Drawing.Color.Plum;
+            this.btnDodajKurs.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDodajKurs.Location = new System.Drawing.Point(375, 227);
+            this.btnDodajKurs.Name = "btnDodajKurs";
+            this.btnDodajKurs.Size = new System.Drawing.Size(101, 24);
+            this.btnDodajKurs.TabIndex = 23;
+            this.btnDodajKurs.Text = "Dodaj";
+            this.btnDodajKurs.UseVisualStyleBackColor = false;
+            this.btnDodajKurs.Click += new System.EventHandler(this.btnDodajKurs_Click);
+            // 
+            // dgvKursevi
+            // 
+            this.dgvKursevi.AllowUserToAddRows = false;
+            this.dgvKursevi.AllowUserToDeleteRows = false;
+            this.dgvKursevi.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dgvKursevi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKursevi.Location = new System.Drawing.Point(24, 290);
+            this.dgvKursevi.Name = "dgvKursevi";
+            this.dgvKursevi.ReadOnly = true;
+            this.dgvKursevi.Size = new System.Drawing.Size(474, 180);
+            this.dgvKursevi.TabIndex = 22;
             // 
             // lblDatumGreska
             // 
@@ -203,42 +254,6 @@ namespace KorisnickiInterfejs.Predavac
             this.label1.Size = new System.Drawing.Size(51, 20);
             this.label1.TabIndex = 19;
             this.label1.Text = "Kurs:";
-            // 
-            // dgvKursevi
-            // 
-            this.dgvKursevi.AllowUserToAddRows = false;
-            this.dgvKursevi.AllowUserToDeleteRows = false;
-            this.dgvKursevi.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.dgvKursevi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvKursevi.Location = new System.Drawing.Point(24, 290);
-            this.dgvKursevi.Name = "dgvKursevi";
-            this.dgvKursevi.ReadOnly = true;
-            this.dgvKursevi.Size = new System.Drawing.Size(474, 180);
-            this.dgvKursevi.TabIndex = 22;
-            // 
-            // btnDodajKurs
-            // 
-            this.btnDodajKurs.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnDodajKurs.BackColor = System.Drawing.Color.Plum;
-            this.btnDodajKurs.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDodajKurs.Location = new System.Drawing.Point(366, 246);
-            this.btnDodajKurs.Name = "btnDodajKurs";
-            this.btnDodajKurs.Size = new System.Drawing.Size(101, 24);
-            this.btnDodajKurs.TabIndex = 23;
-            this.btnDodajKurs.Text = "Dodaj";
-            this.btnDodajKurs.UseVisualStyleBackColor = false;
-            this.btnDodajKurs.Click += new System.EventHandler(this.btnDodajKurs_Click);
-            // 
-            // lblNemaKurseva
-            // 
-            this.lblNemaKurseva.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblNemaKurseva.AutoSize = true;
-            this.lblNemaKurseva.Font = new System.Drawing.Font("Mongolian Baiti", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNemaKurseva.ForeColor = System.Drawing.Color.Red;
-            this.lblNemaKurseva.Location = new System.Drawing.Point(203, 273);
-            this.lblNemaKurseva.Name = "lblNemaKurseva";
-            this.lblNemaKurseva.Size = new System.Drawing.Size(0, 14);
-            this.lblNemaKurseva.TabIndex = 24;
             // 
             // UCPredavac
             // 
@@ -276,6 +291,7 @@ namespace KorisnickiInterfejs.Predavac
         private System.Windows.Forms.Button btnDodajKurs;
         private System.Windows.Forms.DataGridView dgvKursevi;
         private System.Windows.Forms.Label lblNemaKurseva;
+        private Button btnIzbaci;
 
         public Button BtnSacuvajPredavaca { get => btnSacuvajPredavaca; set => btnSacuvajPredavaca = value; }
         public Label LblFirstName { get => lblFirstName; set => lblFirstName = value; }
@@ -293,5 +309,6 @@ namespace KorisnickiInterfejs.Predavac
         public Button BtnDodajKurs { get => btnDodajKurs; set => btnDodajKurs = value; }
         public DataGridView DgvKursevi { get => dgvKursevi; set => dgvKursevi = value; }
         public Label LblNemaKurseva { get => lblNemaKurseva; set => lblNemaKurseva = value; }
+        public Button BtnIzbaci { get => btnIzbaci; set => btnIzbaci = value; }
     }
 }

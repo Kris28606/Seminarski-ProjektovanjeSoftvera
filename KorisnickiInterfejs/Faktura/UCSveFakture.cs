@@ -11,11 +11,7 @@ namespace KorisnickiInterfejs.Faktura
         {
             InitializeComponent();
             controller = new SveFaktureController(this);
-        }
-
-        private void btnNadji_Click(object sender, EventArgs e)
-        {
-            controller.NadjiFakturu();
+            controller.Init();
         }
 
         private void btnStorniraj_Click(object sender, EventArgs e)
@@ -26,6 +22,11 @@ namespace KorisnickiInterfejs.Faktura
         private void txtPretraga_Click(object sender, EventArgs e)
         {
             txtPretraga.Text = "";
+        }
+
+        private void txtPretraga_TextChanged(object sender, EventArgs e)
+        {
+            controller.NadjiFakturu();
         }
     }
 }

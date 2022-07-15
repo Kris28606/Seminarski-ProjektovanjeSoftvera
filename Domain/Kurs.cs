@@ -36,7 +36,7 @@ namespace Domain
             {
                 KursId = (int)reader["KursId"],
                 Naziv = reader["Naziv"].ToString(),
-                DatumPocetka = DateTime.Parse(reader["DatumPocetka"].ToString()),
+                DatumPocetka = (DateTime)reader["DatumPocetka"],
                 Cena = (double)reader["Cena"],
                 Trajanje = (int)reader["Trajanje"]
             };

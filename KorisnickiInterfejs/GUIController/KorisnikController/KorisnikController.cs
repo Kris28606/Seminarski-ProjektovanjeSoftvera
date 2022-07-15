@@ -30,6 +30,14 @@ namespace KorisnickiInterfejs.GUIController
             {
                 korisnik.DgvKursevi.DataSource = kursevi;
                 korisnik.DgvKursevi.Columns["KursId"].Visible = false;
+                korisnik.DgvKursevi.Columns["NazivTabele"].Visible = false;
+                korisnik.DgvKursevi.Columns["Vrednosti"].Visible = false;
+                korisnik.DgvKursevi.Columns["Uslov"].Visible = false;
+                korisnik.DgvKursevi.Columns["Output"].Visible = false;
+                korisnik.DgvKursevi.Columns["Kriterijum"].Visible = false;
+                korisnik.DgvKursevi.Columns["JoinUslov"].Visible = false;
+                korisnik.DgvKursevi.Columns["UpdateUslov"].Visible = false;
+                korisnik.LblKursGreska.ForeColor = Color.Red;
                 korisnik.CbKurs.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.UcitajListuKurseva);
                 korisnik.CbMesto.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Mesto>>(Operacija.UcitajListuMesta);
                 korisnik.CbMesto.DisplayMember = "Naziv";
@@ -46,12 +54,31 @@ namespace KorisnickiInterfejs.GUIController
             }
         }
 
+        internal void IzbaciKurs()
+        {
+            if(kursevi.Count==0)
+            {
+                return;
+            }
+            if(korisnik.DgvKursevi.SelectedRows.Count==0)
+            {
+                korisnik.LblKursGreska.Text = "Niste selektovali nijedan kurs!";
+                return;
+            }
+
+            Domain.Kurs selektovani = (Domain.Kurs)korisnik.DgvKursevi.SelectedRows[0].DataBoundItem;
+            kursevi.Remove(selektovani);
+            korisnik.LblKursGreska.Text = "";
+            korisnik.DgvKursevi.Refresh();
+        }
+
         private void OcistiFormu()
         {
             korisnik.TxtFirsName.Text = "";
             korisnik.TxtLastName.Text = "";
             korisnik.TxtAdrress.Text = "";
             korisnik.TxtContact.Text = "";
+            korisnik.LblKursGreska.Text = "";
             kursevi = new BindingList<Domain.Kurs>();
             korisnik.DgvKursevi.DataSource = kursevi;
         }
@@ -133,6 +160,11 @@ namespace KorisnickiInterfejs.GUIController
                 korisnik.CbMesto.BackColor = Color.LightCoral;
                 nijeDobro = true;
             }
+            if(kursevi.Count==0)
+            {
+                korisnik.LblKursGreska.Text = "Niste dodali nijedan kurs!";
+                nijeDobro = true;
+            }
             return nijeDobro;
 
         }
@@ -143,6 +175,7 @@ namespace KorisnickiInterfejs.GUIController
             korisnik.TxtFirsName.BackColor = Color.White;
             korisnik.TxtAdrress.BackColor = Color.White;
             korisnik.TxtContact.BackColor = Color.White;
+            korisnik.LblKursGreska.Text = "";
         }
 
         public void DodajKurs()
@@ -192,6 +225,7 @@ namespace KorisnickiInterfejs.GUIController
             catch (SystemOperationException se)
             {
                 MessageBox.Show(se.Message);
+                OcistiFormu();
             }
             catch (Exception es)
             {

@@ -31,15 +31,22 @@ namespace KorisnickiInterfejs.GUIController.Predavac
             {
                 predavac.TxtFirstName.Text = trenutni.Ime;
                 predavac.TxtLastName.Text = trenutni.Prezime;
-                predavac.TxtDateOfBirth.Text = trenutni.DatumRodjenja.ToString();
+                predavac.TxtDateOfBirth.Text = trenutni.DatumRodjenja.ToString("dd.MM.yyyy.");
                 predavac.CbGender.Text = trenutni.Pol.ToString();
                 predavac.CbKurs.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.UcitajListuKurseva);
                 predavac.CbKurs.DisplayMember = "Naziv";
                 kursevi = new BindingList<Domain.Kurs>(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.NadjiKurseveZaPredavaca, trenutni));
                 predavac.DgvKursevi.DataSource = kursevi;
                 predavac.DgvKursevi.Columns["KursId"].Visible = false;
+                predavac.DgvKursevi.Columns["NazivTabele"].Visible = false;
+                predavac.DgvKursevi.Columns["Vrednosti"].Visible = false;
+                predavac.DgvKursevi.Columns["Uslov"].Visible = false;
+                predavac.DgvKursevi.Columns["Output"].Visible = false;
+                predavac.DgvKursevi.Columns["Kriterijum"].Visible = false;
+                predavac.DgvKursevi.Columns["JoinUslov"].Visible = false;
+                predavac.DgvKursevi.Columns["UpdateUslov"].Visible = false;
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
@@ -152,8 +159,6 @@ namespace KorisnickiInterfejs.GUIController.Predavac
                 return;
             }
 
-            // da li je izmenjeno?
-
             Domain.Predavac p = new Domain.Predavac
             {
                 Ime = predavac.TxtFirstName.Text,
@@ -170,13 +175,14 @@ namespace KorisnickiInterfejs.GUIController.Predavac
                 MessageBox.Show("Uspesno izmenjen predavac!");
                 predavac.DialogResult = DialogResult.OK;
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
             catch (SystemOperationException es)
             {
                 MessageBox.Show(es.Message);
+                predavac.DialogResult = DialogResult.OK;
             }
             catch (Exception es)
             {

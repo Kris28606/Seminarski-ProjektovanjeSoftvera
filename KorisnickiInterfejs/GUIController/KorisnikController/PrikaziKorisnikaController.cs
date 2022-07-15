@@ -43,7 +43,8 @@ namespace KorisnickiInterfejs.GUIController.Korisnik
                 throw;
             } catch(SystemOperationException se)
             {
-                MessageBox.Show("Korisnik ne moze da se obrise! "+se.Message);
+                MessageBox.Show(se.Message);
+                korisnik.DialogResult = DialogResult.OK;
             }
             catch (Exception es)
             {

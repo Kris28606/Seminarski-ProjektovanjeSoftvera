@@ -160,7 +160,7 @@ namespace KorisnickiInterfejs.Kurs
             this.btnAddCours.Name = "btnAddCours";
             this.btnAddCours.Size = new System.Drawing.Size(163, 37);
             this.btnAddCours.TabIndex = 8;
-            this.btnAddCours.Text = "Dodaj";
+            this.btnAddCours.Text = "Sacuvaj";
             this.btnAddCours.UseVisualStyleBackColor = false;
             this.btnAddCours.Click += new System.EventHandler(this.btnAddCours_Click);
             // 

@@ -9,8 +9,8 @@ namespace Repository
     public interface IRepozitorijum<T> where T : class
     {
         int Sacuvaj(T objekat);
-        void Izmeni(T objekat);
-        void Izbrisi(T objekat);
+        int Izmeni(T objekat);
+        int Izbrisi(T objekat);
         T VratiJedan(T objekat);
         List<T> VratiSve(T objekat);
         List<T> Pretraga(T objekat, string kriterijum);

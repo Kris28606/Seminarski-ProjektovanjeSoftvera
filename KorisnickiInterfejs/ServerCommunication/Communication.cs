@@ -41,10 +41,9 @@ namespace KorisnickiInterfejs.ServerCommunication
             if (soket == null || !soket.Connected)
             {
                 soket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                // da bih mogla da se povezujem sa serverom koliko god puta ja hocu,
-                // jer ono sto je disposovano ne moze ponovo da se koristi
                 soket.Connect("127.0.0.1", 9999);
                 helper = new CommunicationHelper(soket);
+                Debug.WriteLine("Klijentski soket je konektovan!");
             }
         }
 
@@ -111,7 +110,6 @@ namespace KorisnickiInterfejs.ServerCommunication
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                throw;
             }
         }
     }

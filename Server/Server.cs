@@ -12,6 +12,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Server
 {
@@ -28,9 +29,15 @@ namespace Server
 
         public void Start()
         {
-            serverSoket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
-            serverSoket.Listen(5);
-            Debug.WriteLine("Server je pokrenut!");
+            try
+            {
+                serverSoket.Bind(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9999));
+                serverSoket.Listen(5);
+                MessageBox.Show("Server je pokrenut!");
+            } catch(SocketException)
+            {
+                throw;
+            }
         }
 
         public void Listen()
@@ -50,7 +57,7 @@ namespace Server
                 
             } catch(SocketException se)
             {
-                Debug.WriteLine(">>>>> Soket je disposovan i ne moze da ceka klijenta vise. " + se.Message);
+                Debug.WriteLine(">>>>> " + se.Message);
             }
         }
 

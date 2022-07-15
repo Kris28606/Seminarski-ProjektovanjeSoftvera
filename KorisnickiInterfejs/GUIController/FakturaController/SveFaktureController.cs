@@ -19,14 +19,38 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
         public SveFaktureController(UCSveFakture fakture)
         {
             this.ucFakture = fakture;
-            Init();
         }
 
-        private void Init()
+        public void Init()
         {
-            fakture = new BindingList<Domain.Faktura>(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Faktura>>(Operacija.UcitajListuFaktura));
+            try
+            {
+                InicijalizujDgvFakture(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Faktura>>(Operacija.UcitajListuFaktura));
+            } catch(ServerCommunicationException)
+            {
+                throw;
+            } catch(SystemOperationException se)
+            {
+                MessageBox.Show(se.Message);
+            } catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+        }
+
+        private void InicijalizujDgvFakture(List<Domain.Faktura> lista)
+        {
+            fakture = new BindingList<Domain.Faktura>(lista);
             ucFakture.DgvFakture.DataSource = fakture;
             ucFakture.DgvFakture.Columns["FakturaId"].Visible = false;
+            ucFakture.DgvFakture.Columns["NazivTabele"].Visible = false;
+            ucFakture.DgvFakture.Columns["Vrednosti"].Visible = false;
+            ucFakture.DgvFakture.Columns["Uslov"].Visible = false;
+            ucFakture.DgvFakture.Columns["Output"].Visible = false;
+            ucFakture.DgvFakture.Columns["Kriterijum"].Visible = false;
+            ucFakture.DgvFakture.Columns["JoinUslov"].Visible = false;
+            ucFakture.DgvFakture.Columns["UpdateUslov"].Visible = false;
         }
 
         public void NadjiFakturu()
@@ -38,9 +62,8 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
             try
             {
                 string kriterijum = ucFakture.TxtPretraga.Text;
-                fakture = new BindingList<Domain.Faktura>(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Faktura>>(Operacija.NadjiFakture, kriterijum));
-                ucFakture.DgvFakture.DataSource = fakture;
-                ucFakture.DgvFakture.Refresh();
+                fakture = new BindingList<Domain.Faktura>();
+                InicijalizujDgvFakture(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Faktura>>(Operacija.NadjiFakture, kriterijum));
             }
             catch (ServerCommunicationException)
             {
@@ -49,6 +72,7 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
             catch (SystemOperationException se)
             {
                 MessageBox.Show(se.Message);
+                InicijalizujDgvFakture(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Faktura>>(Operacija.UcitajListuFaktura));
             }
             catch (Exception es)
             {
@@ -67,15 +91,11 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
 
             try
             {
-                FrmPrikaziFakturu frmPrikazi = new FrmPrikaziFakturu(faktura);
-                frmPrikazi.ShowDialog();
-                if (frmPrikazi.DialogResult == DialogResult.OK)
-                {
-                    frmPrikazi.Dispose();
-                }
-                fakture = new BindingList<Domain.Faktura>(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Faktura>>(Operacija.UcitajListuFaktura));
-                ucFakture.DgvFakture.DataSource = fakture;
-                ucFakture.DgvFakture.Refresh();
+                faktura = Communication.Instance.PosaljiZahtevVratiRezultat<Domain.Faktura>(Operacija.UcitajFakturu, faktura);
+
+                PokreniFormu(faktura);
+
+                InicijalizujDgvFakture(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Faktura>>(Operacija.UcitajListuFaktura));
             }
             catch (ServerCommunicationException)
             {
@@ -84,6 +104,7 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
             catch (SystemOperationException se)
             {
                 MessageBox.Show(se.Message);
+                InicijalizujDgvFakture(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Faktura>>(Operacija.UcitajListuFaktura));
             }
             catch (Exception es)
             {
@@ -91,6 +112,14 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
             }
         }
 
-
+        private void PokreniFormu(Domain.Faktura faktura)
+        {
+            FrmPrikaziFakturu frmPrikazi = new FrmPrikaziFakturu(faktura);
+            frmPrikazi.ShowDialog();
+            if (frmPrikazi.DialogResult == DialogResult.OK)
+            {
+                frmPrikazi.Dispose();
+            }
+        }
     }
 }

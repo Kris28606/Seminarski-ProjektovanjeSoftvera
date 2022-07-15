@@ -26,7 +26,7 @@ namespace Domain
 
         public string Output => "FakturaId";
 
-        public string Kriterijum => "k.Ime like";
+        public string Kriterijum => " k.Ime+' '+k.Prezime like";
 
         public string JoinUslov => "f join Korisnik k on (f.KorisnikId=k.KorisnikId)";
 
@@ -37,7 +37,7 @@ namespace Domain
             Faktura faktura = new Faktura
             {
                 FakturaId = (int)reader[0],
-                Datum = DateTime.Parse(reader[1].ToString()),
+                Datum = (DateTime)(reader[1]),
                 UkupnaCena = (double)reader[2],
                 NacinPlacanja = (NacinPlacanja)reader[3],
                 Stornirana = (bool)reader[4],

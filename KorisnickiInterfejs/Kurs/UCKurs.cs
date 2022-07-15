@@ -28,10 +28,5 @@ namespace KorisnickiInterfejs.Kurs
             controller.DaLiJeInt();
         }
 
-        private void OcistiKontrole()
-        {
-            controller.OcistiKontrole();
-        }
-
     }
 }

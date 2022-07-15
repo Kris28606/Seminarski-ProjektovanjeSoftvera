@@ -27,11 +27,9 @@ namespace KorisnickiInterfejs.GUIController.Korisnik
         {
             try
             {
-                listaKorisnika = new BindingList<Domain.Korisnik>(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.UcitajListuKorisnika));
-                korisnici.DgvKorisnici.DataSource = listaKorisnika;
-                korisnici.DgvKorisnici.Columns["KorisnikId"].Visible = false;
+                InicijalizujDgvKorisnici(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.UcitajListuKorisnika));
             }
-            catch(ServerCommunicationException)
+            catch (ServerCommunicationException)
             {
                 throw;
             }catch(SystemOperationException se)
@@ -44,18 +42,30 @@ namespace KorisnickiInterfejs.GUIController.Korisnik
             }
         }
 
+        private void InicijalizujDgvKorisnici(List<Domain.Korisnik> lista) {
+            listaKorisnika = new BindingList<Domain.Korisnik>(lista);
+            korisnici.DgvKorisnici.DataSource = listaKorisnika;
+            korisnici.DgvKorisnici.Columns["KorisnikId"].Visible = false;
+            korisnici.DgvKorisnici.Columns["NazivTabele"].Visible = false;
+            korisnici.DgvKorisnici.Columns["Vrednosti"].Visible = false;
+            korisnici.DgvKorisnici.Columns["Uslov"].Visible = false;
+            korisnici.DgvKorisnici.Columns["Output"].Visible = false;
+            korisnici.DgvKorisnici.Columns["Kriterijum"].Visible = false;
+            korisnici.DgvKorisnici.Columns["JoinUslov"].Visible = false;
+            korisnici.DgvKorisnici.Columns["UpdateUslov"].Visible = false;
+            korisnici.DgvKorisnici.Refresh();
+        }
+
         public void NadjiKorisnike()
-        {
-            string kriterijum = korisnici.TxtPretraga.Text;
-            if (string.IsNullOrEmpty(kriterijum))
+        {   try
             {
-                return;
-            }
-            try
-            {
-                listaKorisnika = new BindingList<Domain.Korisnik>(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.NadjiKorisnike, kriterijum));
-                korisnici.DgvKorisnici.DataSource = listaKorisnika;
-                korisnici.DgvKorisnici.Refresh();
+                string kriterijum = korisnici.TxtPretraga.Text;
+                if (string.IsNullOrEmpty(kriterijum))
+                {
+                    InicijalizujDgvKorisnici(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.UcitajListuKorisnika));
+                    return;
+                }
+                InicijalizujDgvKorisnici(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.NadjiKorisnike, kriterijum));
             }
             catch (ServerCommunicationException)
             {
@@ -64,6 +74,7 @@ namespace KorisnickiInterfejs.GUIController.Korisnik
             catch (SystemOperationException se)
             {
                 MessageBox.Show(se.Message);
+                InicijalizujDgvKorisnici(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.UcitajListuKorisnika));
             }
             catch (Exception es)
             {
@@ -80,15 +91,12 @@ namespace KorisnickiInterfejs.GUIController.Korisnik
             try
             {
                 Domain.Korisnik selektovani = (Domain.Korisnik)korisnici.DgvKorisnici.SelectedRows[0].DataBoundItem;
-                FrmPrikaziKorisnika frmPrikazi = new FrmPrikaziKorisnika(selektovani);
-                frmPrikazi.ShowDialog();
-                if (frmPrikazi.DialogResult == DialogResult.OK)
-                {
-                    frmPrikazi.Dispose();
-                }
-                listaKorisnika = new BindingList<Domain.Korisnik>(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.UcitajListuKorisnika));
-                korisnici.DgvKorisnici.DataSource = listaKorisnika;
-                korisnici.DgvKorisnici.Refresh();
+
+                selektovani = Communication.Instance.PosaljiZahtevVratiRezultat<Domain.Korisnik>(Operacija.UcitajKorisnika, selektovani);
+                
+                PokreniFormu(selektovani);
+
+                InicijalizujDgvKorisnici(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.UcitajListuKorisnika));
             }
             catch (ServerCommunicationException)
             {
@@ -97,10 +105,21 @@ namespace KorisnickiInterfejs.GUIController.Korisnik
             catch (SystemOperationException se)
             {
                 MessageBox.Show(se.Message);
+                InicijalizujDgvKorisnici(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Korisnik>>(Operacija.UcitajListuKorisnika));
             }
             catch (Exception es)
             {
                 MessageBox.Show(es.Message);
+            }
+        }
+
+        private void PokreniFormu(Domain.Korisnik selektovani)
+        {
+            FrmPrikaziKorisnika frmPrikazi = new FrmPrikaziKorisnika(selektovani);
+            frmPrikazi.ShowDialog();
+            if (frmPrikazi.DialogResult == DialogResult.OK)
+            {
+                frmPrikazi.Dispose();
             }
         }
     }

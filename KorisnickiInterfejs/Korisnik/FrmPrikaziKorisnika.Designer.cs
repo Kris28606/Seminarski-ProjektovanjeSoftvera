@@ -199,7 +199,7 @@ namespace KorisnickiInterfejs.Korisnik
             this.Controls.Add(this.lblAdrress);
             this.Controls.Add(this.txtFirsName);
             this.Name = "FrmPrikaziKorisnika";
-            this.Text = "Prikazi korisnika";
+            this.Text = "Korisnika";
             this.ResumeLayout(false);
             this.PerformLayout();
 

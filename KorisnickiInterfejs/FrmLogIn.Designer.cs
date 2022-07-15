@@ -142,7 +142,7 @@ namespace KorisnickiInterfejs
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblEmail);
             this.Name = "FrmLogIn";
-            this.Text = "s";
+            this.Text = "Prijava";
             ((System.ComponentModel.ISupportInitialize)(this.pbHide)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbShow)).EndInit();
             this.ResumeLayout(false);

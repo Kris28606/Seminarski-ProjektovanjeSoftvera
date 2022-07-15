@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +18,15 @@ namespace SistemskeOperacije.Korisnik
         protected override void IzvrsiKonkretnuOperaciju()
         {
             int idKorisnika = repozitorijum.Sacuvaj(korisnik);
-
+            korisnik.KorisnikId = idKorisnika;
             foreach (Domain.Kurs kurs in korisnik.ListaKurseva)
             {
-                //repozitorijum.SacuvajKursKorisnik(kurs, idKorisnika);
+                KursKorisnik kk = new KursKorisnik
+                {
+                    Korisnik=korisnik,
+                    Kurs=kurs
+                };
+                repozitorijum.Sacuvaj(kk);
             }
         }
     }

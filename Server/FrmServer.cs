@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,10 +35,12 @@ namespace Server
                 Thread serverNit = new Thread(s.Listen);
                 serverNit.IsBackground = true;
                 serverNit.Start();
-            } catch(IOException ioe)
+            } catch(IOException)
             {
-                MessageBox.Show("Server ne moze da se pokrene!" + ioe.Message);
-                // ne moze da se bind-uje sa ip adresom i portom
+                MessageBox.Show("Server ne moze da se pokrene!");
+            } catch(SocketException)
+            {
+                MessageBox.Show("Server je vec pokrenut!");
             }
         }
 
@@ -45,6 +49,7 @@ namespace Server
             s.Stop();
             btnPokreni.Enabled = true;
             btnZaustavi.Enabled = false;
+            MessageBox.Show("Server je zaustavljen!");
         }
 
         private void FrmServer_FormClosed(object sender, FormClosedEventArgs e)

@@ -38,5 +38,10 @@ namespace KorisnickiInterfejs
         {
             controller.DodajKurs();
         }
+
+        private void btnIzbaci_Click(object sender, EventArgs e)
+        {
+            controller.IzbaciKurs();
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Domain;
-using Repository;
 using SistemskeOperacije;
 using SistemskeOperacije.Faktura;
 using SistemskeOperacije.Korisnik;
@@ -7,7 +6,6 @@ using SistemskeOperacije.Kurs;
 using SistemskeOperacije.Predavac;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +23,6 @@ namespace ApplicationLogic
             return ((UcitajListuFakturaSO)so).Rezultat;
         }
 
-        public User PrijavljeniKorisnik { get; private set; }
 
         public Array VratiSveNacinePlacanja()
         {
@@ -65,10 +62,11 @@ namespace ApplicationLogic
             return ((UcitajListuKorisnikaSO)so).Rezultat;
         }
 
-        public void ObrisiKorisnika(Korisnik korisnik)
+        public bool ObrisiKorisnika(Korisnik korisnik)
         {
             OpstaSO so = new ObrisiKorisnikaSO(korisnik);
             so.Izvrsi();
+            return ((ObrisiKorisnikaSO)so).Rezultat;
         }
 
         public List<Korisnik> NadjiKorisnika(string kriterijum)
@@ -92,10 +90,11 @@ namespace ApplicationLogic
             return ((NadjiKurseveZaKorisnikaSO)so).Rezultat;
         }
 
-        public void StornirajFakturu(Faktura faktura)
+        public bool StornirajFakturu(Faktura faktura)
         {
             OpstaSO so = new StornirajFakturuSO(faktura);
             so.Izvrsi();
+            return((StornirajFakturuSO)so).Rezultat;
         }
 
         private Controller()
@@ -154,10 +153,11 @@ namespace ApplicationLogic
             so.Izvrsi();
         }
 
-        public void IzmeniKurs(Kurs k)
+        public bool IzmeniKurs(Kurs k)
         {
             OpstaSO so = new IzmeniKursSO(k);
             so.Izvrsi();
+            return ((IzmeniKursSO)so).Rezultat;
         }
 
         public void SacuvajFakturu(Faktura faktura)
@@ -172,10 +172,39 @@ namespace ApplicationLogic
             so.Izvrsi();
         }
 
-        public void IzmeniPredavaca(Predavac p)
+        public bool IzmeniPredavaca(Predavac p)
         {
             OpstaSO so = new IzmeniPredavacaSO(p);
             so.Izvrsi();
+            return ((IzmeniPredavacaSO)so).Rezultat;
+        }
+
+        public Kurs UcitajKurs(Kurs k)
+        {
+            OpstaSO so = new UcitajKursSO(k);
+            so.Izvrsi();
+            return ((UcitajKursSO)so).Rezultat;
+        }
+
+        public Predavac UcitajPredavaca(Predavac p)
+        {
+            OpstaSO so = new UcitajPredavacaSO(p);
+            so.Izvrsi();
+            return ((UcitajPredavacaSO)so).Rezultat;
+        }
+
+        public Korisnik UcitajKorisnika(Korisnik k)
+        {
+            OpstaSO so = new UcitajKorisnikaSO(k);
+            so.Izvrsi();
+            return ((UcitajKorisnikaSO)so).Rezultat;
+        }
+
+        public Faktura UcitajFakturu(Faktura f)
+        {
+            OpstaSO so = new UcitajFakturuSO(f);
+            so.Izvrsi();
+            return ((UcitajFakturuSO)so).Rezultat;
         }
     }
 }

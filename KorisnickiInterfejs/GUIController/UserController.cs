@@ -38,11 +38,6 @@ namespace KorisnickiInterfejs.GUIController
             {
                 Communication.Instance.Connect();
                 user = Communication.Instance.PosaljiZahtevVratiRezultat<User>(Common.Operacija.Prijava, user);
-                /*if(user==null)
-                {
-                    MessageBox.Show("Korisnik ne postoji!");
-                    return;
-                }*/
                 Session.Session.Instance.TrenutnoPrijavljeni = user;
                 MessageBox.Show("Dobrodosli, " + user.Ime + " " + user.Prezime + "!");
                 logIn.DialogResult = DialogResult.OK;

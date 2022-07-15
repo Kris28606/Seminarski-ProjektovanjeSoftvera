@@ -52,7 +52,7 @@ namespace KorisnickiInterfejs.Faktura
             this.cbKorisnik.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbKorisnik.Enabled = false;
             this.cbKorisnik.FormattingEnabled = true;
-            this.cbKorisnik.Location = new System.Drawing.Point(284, 82);
+            this.cbKorisnik.Location = new System.Drawing.Point(253, 82);
             this.cbKorisnik.Name = "cbKorisnik";
             this.cbKorisnik.Size = new System.Drawing.Size(162, 21);
             this.cbKorisnik.TabIndex = 16;
@@ -61,7 +61,7 @@ namespace KorisnickiInterfejs.Faktura
             // 
             this.txtDatum.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtDatum.Enabled = false;
-            this.txtDatum.Location = new System.Drawing.Point(284, 202);
+            this.txtDatum.Location = new System.Drawing.Point(253, 202);
             this.txtDatum.Name = "txtDatum";
             this.txtDatum.ReadOnly = true;
             this.txtDatum.Size = new System.Drawing.Size(162, 20);
@@ -73,7 +73,7 @@ namespace KorisnickiInterfejs.Faktura
             this.lblKorisnik.AutoSize = true;
             this.lblKorisnik.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblKorisnik.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKorisnik.Location = new System.Drawing.Point(151, 78);
+            this.lblKorisnik.Location = new System.Drawing.Point(120, 78);
             this.lblKorisnik.Name = "lblKorisnik";
             this.lblKorisnik.Size = new System.Drawing.Size(91, 23);
             this.lblKorisnik.TabIndex = 13;
@@ -85,7 +85,7 @@ namespace KorisnickiInterfejs.Faktura
             this.lblUkupnaCena.AutoSize = true;
             this.lblUkupnaCena.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblUkupnaCena.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUkupnaCena.Location = new System.Drawing.Point(137, 260);
+            this.lblUkupnaCena.Location = new System.Drawing.Point(106, 260);
             this.lblUkupnaCena.Name = "lblUkupnaCena";
             this.lblUkupnaCena.Size = new System.Drawing.Size(127, 23);
             this.lblUkupnaCena.TabIndex = 12;
@@ -97,7 +97,7 @@ namespace KorisnickiInterfejs.Faktura
             this.lblNacinPlacanja.AutoSize = true;
             this.lblNacinPlacanja.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblNacinPlacanja.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNacinPlacanja.Location = new System.Drawing.Point(123, 140);
+            this.lblNacinPlacanja.Location = new System.Drawing.Point(92, 140);
             this.lblNacinPlacanja.Name = "lblNacinPlacanja";
             this.lblNacinPlacanja.Size = new System.Drawing.Size(141, 23);
             this.lblNacinPlacanja.TabIndex = 10;
@@ -109,7 +109,7 @@ namespace KorisnickiInterfejs.Faktura
             this.lblDatum.AutoSize = true;
             this.lblDatum.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.lblDatum.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDatum.Location = new System.Drawing.Point(160, 198);
+            this.lblDatum.Location = new System.Drawing.Point(129, 198);
             this.lblDatum.Name = "lblDatum";
             this.lblDatum.Size = new System.Drawing.Size(73, 23);
             this.lblDatum.TabIndex = 11;
@@ -119,7 +119,7 @@ namespace KorisnickiInterfejs.Faktura
             // 
             this.txtUkupnaCena.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUkupnaCena.Enabled = false;
-            this.txtUkupnaCena.Location = new System.Drawing.Point(284, 264);
+            this.txtUkupnaCena.Location = new System.Drawing.Point(253, 264);
             this.txtUkupnaCena.Name = "txtUkupnaCena";
             this.txtUkupnaCena.ReadOnly = true;
             this.txtUkupnaCena.Size = new System.Drawing.Size(162, 20);
@@ -131,7 +131,7 @@ namespace KorisnickiInterfejs.Faktura
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(151, 327);
+            this.label1.Location = new System.Drawing.Point(120, 327);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 23);
             this.label1.TabIndex = 18;
@@ -141,7 +141,7 @@ namespace KorisnickiInterfejs.Faktura
             // 
             this.txtStornirana.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtStornirana.Enabled = false;
-            this.txtStornirana.Location = new System.Drawing.Point(284, 331);
+            this.txtStornirana.Location = new System.Drawing.Point(253, 331);
             this.txtStornirana.Name = "txtStornirana";
             this.txtStornirana.ReadOnly = true;
             this.txtStornirana.Size = new System.Drawing.Size(162, 20);
@@ -152,16 +152,17 @@ namespace KorisnickiInterfejs.Faktura
             this.cbNacinPlacanja.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cbNacinPlacanja.Enabled = false;
             this.cbNacinPlacanja.FormattingEnabled = true;
-            this.cbNacinPlacanja.Location = new System.Drawing.Point(284, 144);
+            this.cbNacinPlacanja.Location = new System.Drawing.Point(253, 144);
             this.cbNacinPlacanja.Name = "cbNacinPlacanja";
             this.cbNacinPlacanja.Size = new System.Drawing.Size(162, 21);
             this.cbNacinPlacanja.TabIndex = 20;
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.BackColor = System.Drawing.Color.Khaki;
             this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(243, 328);
+            this.button1.Location = new System.Drawing.Point(285, 328);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(128, 41);
             this.button1.TabIndex = 21;
@@ -171,9 +172,10 @@ namespace KorisnickiInterfejs.Faktura
             // 
             // button2
             // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button2.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.button2.Font = new System.Drawing.Font("Mongolian Baiti", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(32, 328);
+            this.button2.Location = new System.Drawing.Point(56, 328);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(128, 41);
             this.button2.TabIndex = 22;
@@ -183,16 +185,16 @@ namespace KorisnickiInterfejs.Faktura
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Font = new System.Drawing.Font("Mongolian Baiti", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(96, 41);
+            this.groupBox1.Location = new System.Drawing.Point(40, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(399, 402);
+            this.groupBox1.Size = new System.Drawing.Size(455, 398);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Faktura";
             // 
             // FrmPrikaziFakturu
             // 
@@ -200,7 +202,7 @@ namespace KorisnickiInterfejs.Faktura
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(611, 483);
+            this.ClientSize = new System.Drawing.Size(548, 483);
             this.Controls.Add(this.cbNacinPlacanja);
             this.Controls.Add(this.txtStornirana);
             this.Controls.Add(this.label1);
@@ -213,7 +215,7 @@ namespace KorisnickiInterfejs.Faktura
             this.Controls.Add(this.lblDatum);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmPrikaziFakturu";
-            this.Text = "Prikazi fakturu";
+            this.Text = "Fakturu";
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

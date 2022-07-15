@@ -10,13 +10,18 @@ namespace SistemskeOperacije.Predavac
     public class IzmeniPredavacaSO : OpstaSO
     {
         private Domain.Predavac predavac;
+        public bool Rezultat { get; set; }
         public IzmeniPredavacaSO(Domain.Predavac p)
         {
             predavac = p;
         }
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            repozitorijum.Izmeni(predavac);
+            if(repozitorijum.Izmeni(predavac)==0)
+            {
+                Rezultat = false;
+                return;
+            }
             KursPredavac kp = new KursPredavac
             {
                 Predavac = predavac
@@ -28,6 +33,7 @@ namespace SistemskeOperacije.Predavac
                 kp.Kurs = k;
                 repozitorijum.Sacuvaj(kp);
             }
+            Rezultat = true;
         }
     }
 }

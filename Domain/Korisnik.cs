@@ -26,7 +26,7 @@ namespace Domain
 
         public string Output => "KorisnikId";
 
-        public string Kriterijum => "k.Ime like";
+        public string Kriterijum => " k.Ime+' '+k.Prezime like";
 
         public string JoinUslov => "k join Mesto m on (k.MestoId= m.MestoId)";
 

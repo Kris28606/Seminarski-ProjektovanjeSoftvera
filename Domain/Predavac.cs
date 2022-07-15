@@ -25,7 +25,7 @@ namespace Domain
 
         public string Output => "PredavacId";
 
-        public string Kriterijum => " Ime like";
+        public string Kriterijum => " Ime+' '+Prezime like";
 
         public string JoinUslov => "";
 
@@ -39,7 +39,7 @@ namespace Domain
                 Ime = reader[1].ToString(),
                 Prezime = reader[2].ToString(),
                 Pol = (Pol)reader[3],
-                DatumRodjenja = DateTime.Parse(reader[4].ToString()),
+                DatumRodjenja = (DateTime)reader[4],
 
             };
             return p;

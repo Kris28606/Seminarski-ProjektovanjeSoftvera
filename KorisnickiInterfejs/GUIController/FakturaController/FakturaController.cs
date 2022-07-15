@@ -36,6 +36,13 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
                 faktura.CbKurs.DisplayMember = "Naziv";
                 faktura.DgvStavkeFakture.DataSource = stavke;
                 faktura.DgvStavkeFakture.Columns["FakturaId"].Visible = false;
+                faktura.DgvStavkeFakture.Columns["NazivTabele"].Visible = false;
+                faktura.DgvStavkeFakture.Columns["Vrednosti"].Visible = false;
+                faktura.DgvStavkeFakture.Columns["Uslov"].Visible = false;
+                faktura.DgvStavkeFakture.Columns["Output"].Visible = false;
+                faktura.DgvStavkeFakture.Columns["Kriterijum"].Visible = false;
+                faktura.DgvStavkeFakture.Columns["JoinUslov"].Visible = false;
+                faktura.DgvStavkeFakture.Columns["UpdateUslov"].Visible = false;
             }
             catch (ServerCommunicationException)
             {
@@ -111,6 +118,7 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
             {
                 Communication.Instance.PosaljiZahtevBezRezultata(Operacija.ZapamtiFakturu, novaFaktura);
                 MessageBox.Show("Uspesno sacuvana faktura!");
+                OcistiFormu();
             }
             catch (ServerCommunicationException)
             {
@@ -119,11 +127,26 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
             catch (SystemOperationException se)
             {
                 MessageBox.Show(se.Message);
+                OcistiFormu();
             }
             catch (Exception es)
             {
                 MessageBox.Show(es.Message);
             }
+        }
+
+        private void OcistiFormu()
+        {
+            trenutnaFaktura = new Domain.Faktura();
+            faktura.CbKorisnik.Text = "";
+            faktura.CbNacinPlacanja.Text = "";
+            faktura.TxtDatum.Text = "";
+            faktura.TxtUkupnaCena.Text = "";
+            faktura.TxtVrednostStavke.Text = "";
+            faktura.CbKurs.Text = "";
+            stavke = new BindingList<StavkaFakture>();
+            faktura.DgvStavkeFakture.DataSource = stavke;
+
         }
 
         private bool Validacija()
@@ -186,6 +209,8 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
                 stavke[i].RedniBroj--;
             }
             faktura.LblNijeSelektovanaStavka.Text = "";
+            trenutnaFaktura.UkupnaCena -= selektovana.VrednostStavke;
+            faktura.TxtUkupnaCena.Text = trenutnaFaktura.UkupnaCena.ToString();
             stavke.Remove(selektovana);
             faktura.DgvStavkeFakture.Refresh();
         }

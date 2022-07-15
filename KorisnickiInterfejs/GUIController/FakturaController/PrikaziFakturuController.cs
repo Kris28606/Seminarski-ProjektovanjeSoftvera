@@ -25,7 +25,7 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
         private void Init()
         {
             faktura.CbKorisnik.Text = trenutna.Korisnik.Ime + " " + trenutna.Korisnik.Prezime;
-            faktura.TxtDatum.Text = trenutna.Datum.ToString();
+            faktura.TxtDatum.Text = trenutna.Datum.ToString("dd.MM.yyyy. HH:mm");
             faktura.TxtStornirana.Text = trenutna.Stornirana.ToString();
             faktura.TxtUkupnaCena.Text = trenutna.UkupnaCena.ToString();
             faktura.CbNacinPlacanja.Text = trenutna.NacinPlacanja.ToString();
@@ -53,6 +53,7 @@ namespace KorisnickiInterfejs.GUIController.FakturaController
             catch (SystemOperationException se)
             {
                 MessageBox.Show(se.Message);
+                faktura.DialogResult = DialogResult.OK;
             }
             catch (Exception es)
             {

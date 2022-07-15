@@ -10,6 +10,7 @@ namespace SistemskeOperacije.Korisnik
     public class ObrisiKorisnikaSO : OpstaSO
     {
         private Domain.Korisnik korisnik;
+        public bool Rezultat { get; private set; }
 
         public ObrisiKorisnikaSO(Domain.Korisnik korisnik)
         {
@@ -23,7 +24,12 @@ namespace SistemskeOperacije.Korisnik
                 Korisnik = korisnik
             };
             repozitorijum.Izbrisi(kk);
-            repozitorijum.Izbrisi(korisnik);
+            if (repozitorijum.Izbrisi(korisnik) == 0)
+            {
+                Rezultat = false;
+                return;
+            }
+            Rezultat = true;
         }
     }
 }

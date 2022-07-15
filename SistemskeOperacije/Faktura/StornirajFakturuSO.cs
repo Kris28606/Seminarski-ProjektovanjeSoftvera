@@ -9,6 +9,7 @@ namespace SistemskeOperacije.Faktura
     public class StornirajFakturuSO : OpstaSO
     {
         private Domain.Faktura faktura;
+        public bool Rezultat { get; private set; }
         public StornirajFakturuSO(Domain.Faktura faktura)
         {
             this.faktura = faktura;
@@ -16,7 +17,12 @@ namespace SistemskeOperacije.Faktura
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            repozitorijum.Izmeni(faktura);
+            if(repozitorijum.Izmeni(faktura)==0)
+            {
+                Rezultat = false;
+                return;
+            }
+            Rezultat = true;
         }
     }
 }

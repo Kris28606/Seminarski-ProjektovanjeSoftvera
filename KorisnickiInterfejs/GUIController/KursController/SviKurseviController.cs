@@ -27,12 +27,10 @@ namespace KorisnickiInterfejs.GUIController
         {
             try
             {
-                List<Domain.Kurs> lista = Communication.Instance.PosaljiZahtevVratiRezultat < List<Domain.Kurs> >(Operacija.UcitajListuKurseva);
-                listaKurseva = new BindingList<Domain.Kurs>(lista);
-                kursevi.DgvKursevi.DataSource = listaKurseva;
-                kursevi.DgvKursevi.Columns["KursId"].Visible = false;
+                InicijalizujDgvKursevi(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.UcitajListuKurseva));
+
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
@@ -51,23 +49,41 @@ namespace KorisnickiInterfejs.GUIController
             try
             {
                 string kriterijum = kursevi.TxtPretraga.Text;
-                List<Domain.Kurs> lista = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.NadjiKurseve, kriterijum);
-                listaKurseva = new BindingList<Domain.Kurs>(lista);
-                kursevi.DgvKursevi.DataSource = listaKurseva;
-                kursevi.DgvKursevi.Refresh();
+                if(string.IsNullOrEmpty(kriterijum))
+                {
+                    InicijalizujDgvKursevi(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.UcitajListuKurseva));
+                    return;
+                }
+                InicijalizujDgvKursevi(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.NadjiKurseve, kriterijum));
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
             catch (SystemOperationException es)
             {
                 MessageBox.Show(es.Message);
+                InicijalizujDgvKursevi(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.UcitajListuKurseva));
             }
             catch (Exception es)
             {
                 MessageBox.Show(es.Message);
             }
+        }
+
+        private void InicijalizujDgvKursevi(List<Domain.Kurs> lista)
+        {
+            listaKurseva = new BindingList<Domain.Kurs>(lista);
+            kursevi.DgvKursevi.DataSource = listaKurseva;
+            kursevi.DgvKursevi.Columns["KursId"].Visible = false;
+            kursevi.DgvKursevi.Columns["NazivTabele"].Visible = false;
+            kursevi.DgvKursevi.Columns["Vrednosti"].Visible = false;
+            kursevi.DgvKursevi.Columns["Uslov"].Visible = false;
+            kursevi.DgvKursevi.Columns["Output"].Visible = false;
+            kursevi.DgvKursevi.Columns["Kriterijum"].Visible = false;
+            kursevi.DgvKursevi.Columns["JoinUslov"].Visible = false;
+            kursevi.DgvKursevi.Columns["UpdateUslov"].Visible = false;
+            kursevi.DgvKursevi.Refresh();
         }
 
         public void PrikaziKurs()
@@ -80,25 +96,19 @@ namespace KorisnickiInterfejs.GUIController
             {
                 Domain.Kurs selektovani = (Domain.Kurs)kursevi.DgvKursevi.SelectedRows[0].DataBoundItem;
 
-                FrmPrikaziKurs frmPrikazi = new FrmPrikaziKurs(selektovani);
-                frmPrikazi.ShowDialog();
+                selektovani = Communication.Instance.PosaljiZahtevVratiRezultat<Domain.Kurs>(Operacija.UcitajKurs, selektovani);
 
-                if (frmPrikazi.DialogResult == DialogResult.OK)
-                {
-                    frmPrikazi.Dispose();
-                }
-                List<Domain.Kurs> lista= Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.UcitajListuKurseva);
-                listaKurseva = new BindingList<Domain.Kurs>(lista);
-                kursevi.DgvKursevi.DataSource = listaKurseva;
-                kursevi.DgvKursevi.Refresh();
+                PrikaziFormu(selektovani);
+                InicijalizujDgvKursevi(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.UcitajListuKurseva));
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
             catch (SystemOperationException es)
             {
                 MessageBox.Show(es.Message);
+                InicijalizujDgvKursevi(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Kurs>>(Operacija.UcitajListuKurseva));
             }
             catch (Exception es)
             {
@@ -106,7 +116,16 @@ namespace KorisnickiInterfejs.GUIController
             }
         }
 
+        private void PrikaziFormu(Domain.Kurs selektovani)
+        {
+            FrmPrikaziKurs frmPrikazi = new FrmPrikaziKurs(selektovani);
+            frmPrikazi.ShowDialog();
 
+            if (frmPrikazi.DialogResult == DialogResult.OK)
+            {
+                frmPrikazi.Dispose();
+            }
+        }
     }
 }
 

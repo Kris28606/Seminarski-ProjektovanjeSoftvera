@@ -1,4 +1,5 @@
-﻿using KorisnickiInterfejs.Exceptions;
+﻿using Common;
+using KorisnickiInterfejs.Exceptions;
 using KorisnickiInterfejs.Predavac;
 using KorisnickiInterfejs.ServerCommunication;
 using System;
@@ -25,12 +26,9 @@ namespace KorisnickiInterfejs.GUIController.Predavac
         {
             try
             {
-                List<Domain.Predavac> lista = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.UcitajListuPredavaca);
-                listaPredavaca = new BindingList<Domain.Predavac>(lista);
-                predavaci.DgvPredavaci.DataSource = listaPredavaca;
-                predavaci.DgvPredavaci.Columns["PredavacId"].Visible = false;
+                InicijalizujDgvPredavaci(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.UcitajListuPredavaca));
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
@@ -44,27 +42,41 @@ namespace KorisnickiInterfejs.GUIController.Predavac
             }
         }
     
+        private void InicijalizujDgvPredavaci(List<Domain.Predavac> lista)
+        {
+            listaPredavaca = new BindingList<Domain.Predavac>(lista);
+            predavaci.DgvPredavaci.DataSource = listaPredavaca;
+            predavaci.DgvPredavaci.Columns["PredavacId"].Visible = false;
+            predavaci.DgvPredavaci.Columns["NazivTabele"].Visible = false;
+            predavaci.DgvPredavaci.Columns["Vrednosti"].Visible = false;
+            predavaci.DgvPredavaci.Columns["Uslov"].Visible = false;
+            predavaci.DgvPredavaci.Columns["Output"].Visible = false;
+            predavaci.DgvPredavaci.Columns["Kriterijum"].Visible = false;
+            predavaci.DgvPredavaci.Columns["JoinUslov"].Visible = false;
+            predavaci.DgvPredavaci.Columns["UpdateUslov"].Visible = false;
+            predavaci.DgvPredavaci.Refresh();
+        }
+
         public void NadjiPredavace()
         {
             if (string.IsNullOrEmpty(predavaci.TxtPretraga.Text))
             {
+                InicijalizujDgvPredavaci(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.UcitajListuPredavaca));
                 return;
             }
             try
             {
                 string kriterijum = predavaci.TxtPretraga.Text;
-                List<Domain.Predavac> lista = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.NadjiPredavace, kriterijum);
-                listaPredavaca = new BindingList<Domain.Predavac>(lista);
-                predavaci.DgvPredavaci.DataSource = listaPredavaca;
-                predavaci.DgvPredavaci.Refresh();
+                InicijalizujDgvPredavaci(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.NadjiPredavace, kriterijum));
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
             catch (SystemOperationException es)
             {
                 MessageBox.Show(es.Message);
+                InicijalizujDgvPredavaci(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.UcitajListuPredavaca));
             }
             catch (Exception es)
             {
@@ -80,27 +92,22 @@ namespace KorisnickiInterfejs.GUIController.Predavac
             }
 
             Domain.Predavac selektovani = (Domain.Predavac)predavaci.DgvPredavaci.SelectedRows[0].DataBoundItem;
-
-            FrmPrikaziPredavaca frmPrikazi = new FrmPrikaziPredavaca(selektovani);
-            frmPrikazi.ShowDialog();
-            if (frmPrikazi.DialogResult == DialogResult.OK)
-            {
-                frmPrikazi.Dispose();
-            }
             try
             {
-                List<Domain.Predavac> lista = Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.UcitajListuPredavaca);
-                listaPredavaca = new BindingList<Domain.Predavac>(lista);
-                predavaci.DgvPredavaci.DataSource = listaPredavaca;
-                predavaci.DgvPredavaci.Refresh();
+                selektovani = Communication.Instance.PosaljiZahtevVratiRezultat<Domain.Predavac>(Operacija.UcitajPredavaca, selektovani);
+
+                PrikaziFormu(selektovani);
+
+                InicijalizujDgvPredavaci(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.UcitajListuPredavaca));
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
             catch (SystemOperationException es)
             {
                 MessageBox.Show(es.Message);
+                InicijalizujDgvPredavaci(Communication.Instance.PosaljiZahtevVratiRezultat<List<Domain.Predavac>>(Common.Operacija.UcitajListuPredavaca));
             }
             catch (Exception es)
             {
@@ -108,7 +115,14 @@ namespace KorisnickiInterfejs.GUIController.Predavac
             }
         }
 
-
-
+        private void PrikaziFormu(Domain.Predavac selektovani)
+        {
+            FrmPrikaziPredavaca frmPrikazi = new FrmPrikaziPredavaca(selektovani);
+            frmPrikazi.ShowDialog();
+            if (frmPrikazi.DialogResult == DialogResult.OK)
+            {
+                frmPrikazi.Dispose();
+            }
+        }
     }
 }

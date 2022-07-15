@@ -34,8 +34,15 @@ namespace KorisnickiInterfejs.GUIController.Predavac
                 predavac.CbGender.DataSource = Communication.Instance.PosaljiZahtevVratiRezultat<Domain.Pol[]>(Operacija.UcitajSvePolove);
                 predavac.DgvKursevi.DataSource = kursevi;
                 predavac.DgvKursevi.Columns["KursId"].Visible = false;
+                predavac.DgvKursevi.Columns["NazivTabele"].Visible = false;
+                predavac.DgvKursevi.Columns["Vrednosti"].Visible = false;
+                predavac.DgvKursevi.Columns["Uslov"].Visible = false;
+                predavac.DgvKursevi.Columns["Output"].Visible = false;
+                predavac.DgvKursevi.Columns["Kriterijum"].Visible = false;
+                predavac.DgvKursevi.Columns["JoinUslov"].Visible = false;
+                predavac.DgvKursevi.Columns["UpdateUslov"].Visible = false;
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
@@ -49,7 +56,26 @@ namespace KorisnickiInterfejs.GUIController.Predavac
             }
 
         }
-        
+
+        internal void IzbaciKurs()
+        {
+            
+            if(kursevi.Count==0)
+            {
+                return;
+            }
+            if(predavac.DgvKursevi.SelectedRows.Count==0)
+            {
+                predavac.LblNemaKurseva.Text = "Niste selektovali nijedan kurs!";
+                return;
+            }
+
+            Domain.Kurs selektovani = (Domain.Kurs)predavac.DgvKursevi.SelectedRows[0].DataBoundItem;
+            predavac.LblNemaKurseva.Text = "";
+            kursevi.Remove(selektovani);
+            predavac.DgvKursevi.Refresh();
+        }
+
         private string ime = "";
         private string prezime = "";
 
@@ -160,13 +186,14 @@ namespace KorisnickiInterfejs.GUIController.Predavac
                 MessageBox.Show("Uspesno sacuvan predavac!");
                 OcistiFormu();
             }
-            catch (ServerCommunicationException es)
+            catch (ServerCommunicationException)
             {
                 throw;
             }
             catch (SystemOperationException es)
             {
                 MessageBox.Show(es.Message);
+                OcistiFormu();
             }
             catch (Exception es)
             {

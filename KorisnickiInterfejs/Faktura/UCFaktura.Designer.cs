@@ -31,6 +31,7 @@ namespace KorisnickiInterfejs.Faktura
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCFaktura));
             this.lblNacinPlacanja = new System.Windows.Forms.Label();
             this.lblDatum = new System.Windows.Forms.Label();
             this.lblUkupnaCena = new System.Windows.Forms.Label();
@@ -104,6 +105,7 @@ namespace KorisnickiInterfejs.Faktura
             // 
             // gbFaktura
             // 
+            this.gbFaktura.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gbFaktura.Controls.Add(this.lblNijeSelektovanaStavka);
             this.gbFaktura.Controls.Add(this.btnObrisiStavku);
             this.gbFaktura.Controls.Add(this.lblDatumGreska);
@@ -142,7 +144,7 @@ namespace KorisnickiInterfejs.Faktura
             this.btnObrisiStavku.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnObrisiStavku.BackColor = System.Drawing.Color.LightCoral;
             this.btnObrisiStavku.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnObrisiStavku.Location = new System.Drawing.Point(682, 184);
+            this.btnObrisiStavku.Location = new System.Drawing.Point(682, 161);
             this.btnObrisiStavku.Name = "btnObrisiStavku";
             this.btnObrisiStavku.Size = new System.Drawing.Size(162, 34);
             this.btnObrisiStavku.TabIndex = 15;
@@ -173,6 +175,7 @@ namespace KorisnickiInterfejs.Faktura
             // 
             // btnSacuvajFakturu
             // 
+            this.btnSacuvajFakturu.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnSacuvajFakturu.BackColor = System.Drawing.Color.Thistle;
             this.btnSacuvajFakturu.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSacuvajFakturu.Location = new System.Drawing.Point(432, 58);
@@ -187,8 +190,9 @@ namespace KorisnickiInterfejs.Faktura
             // 
             this.dgvStavkeFakture.AllowUserToAddRows = false;
             this.dgvStavkeFakture.AllowUserToDeleteRows = false;
+            this.dgvStavkeFakture.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dgvStavkeFakture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStavkeFakture.Location = new System.Drawing.Point(398, 224);
+            this.dgvStavkeFakture.Location = new System.Drawing.Point(398, 212);
             this.dgvStavkeFakture.Name = "dgvStavkeFakture";
             this.dgvStavkeFakture.ReadOnly = true;
             this.dgvStavkeFakture.Size = new System.Drawing.Size(446, 257);
@@ -232,6 +236,7 @@ namespace KorisnickiInterfejs.Faktura
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.Controls.Add(this.btnDodajStavku);
             this.groupBox1.Controls.Add(this.cbKurs);
             this.groupBox1.Controls.Add(this.txtVrednostStavke);
@@ -246,6 +251,7 @@ namespace KorisnickiInterfejs.Faktura
             // 
             // btnDodajStavku
             // 
+            this.btnDodajStavku.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnDodajStavku.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnDodajStavku.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDodajStavku.Location = new System.Drawing.Point(154, 158);
@@ -302,6 +308,8 @@ namespace KorisnickiInterfejs.Faktura
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MistyRose;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.gbFaktura);
             this.Name = "UCFaktura";
             this.Size = new System.Drawing.Size(882, 523);

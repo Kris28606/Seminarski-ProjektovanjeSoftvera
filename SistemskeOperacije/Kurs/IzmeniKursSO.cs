@@ -10,6 +10,7 @@ namespace SistemskeOperacije
     public class IzmeniKursSO : OpstaSO
     {
         private Domain.Kurs kurs;
+        public bool Rezultat { get; private set; }
         public IzmeniKursSO(Domain.Kurs k)
         {
             kurs = k;
@@ -17,7 +18,12 @@ namespace SistemskeOperacije
 
         protected override void IzvrsiKonkretnuOperaciju()
         {
-            repozitorijum.Izmeni(kurs);
+            if(repozitorijum.Izmeni(kurs)==0)
+            {
+                Rezultat = false;
+                return;
+            }
+            Rezultat = true;
         }
     }
 }

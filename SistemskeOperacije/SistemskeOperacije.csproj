@@ -43,21 +43,25 @@
   <ItemGroup>
     <Compile Include="Faktura\NadjiFaktureSO.cs" />
     <Compile Include="Faktura\StornirajFakturuSO.cs" />
+    <Compile Include="Faktura\UcitajFakturuSO.cs" />
     <Compile Include="Faktura\UcitajListuFakturaSO.cs" />
     <Compile Include="Faktura\ZapamtiFakturuSO.cs" />
     <Compile Include="Korisnik\NadjiKorisnikeSO.cs" />
     <Compile Include="Korisnik\NadjiKurseveZaKorisnikaSO.cs" />
     <Compile Include="Korisnik\ObrisiKorisnikaSO.cs" />
+    <Compile Include="Korisnik\UcitajKorisnikaSO.cs" />
     <Compile Include="Korisnik\UcitajListuKorisnikaSO.cs" />
     <Compile Include="Korisnik\ZapamtiKorisnikaSO.cs" />
     <Compile Include="Kurs\IzmeniKursSO.cs" />
     <Compile Include="Kurs\NadjiKurseveSO.cs" />
+    <Compile Include="Kurs\UcitajKursSO.cs" />
     <Compile Include="Predavac\NadjiKurseveZaPredavacaSO.cs" />
     <Compile Include="Kurs\UcitajListuKursevaSO.cs" />
     <Compile Include="OpstaSO.cs" />
     <Compile Include="Predavac\IzmeniPredavacaSO.cs" />
     <Compile Include="Predavac\NadjiPredavaceSO.cs" />
     <Compile Include="Predavac\UcitajListuPredavacaSO.cs" />
+    <Compile Include="Predavac\UcitajPredavacaSO.cs" />
     <Compile Include="Predavac\ZapamtiPredavacaSO.cs" />
     <Compile Include="PrijavaSO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

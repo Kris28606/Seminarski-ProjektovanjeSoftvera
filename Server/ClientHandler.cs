@@ -3,11 +3,11 @@ using Common;
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,14 +21,12 @@ namespace Server
 
         public ClientHandler(Socket klijentSoket)
         {
-            //vezan samo za jednog klijenta
             this.klijentSoket = klijentSoket;
             helper = new CommunicationHelper(klijentSoket);
         }
 
         public void ObradiZahteve()
         {
-            bool kraj = false;
             try
             {
                 while (!kraj)
@@ -49,13 +47,10 @@ namespace Server
             }
             catch (IOException ex)
             {
-                //klijent zatvorio svoju formu
-                Debug.WriteLine(">>>>>> " + ex.Message);
+                Debug.WriteLine(">>>>>> Klijent zatvorio formu: " + ex.Message);
             } finally
             {
                 Stop();
-                // ako stavim ovo dole u case bacice mi ovaj exception gore jer cu pokusati
-                // da serijalizujem poruku a soket je disposovan
             }
         }
 
@@ -66,6 +61,7 @@ namespace Server
                 klijentSoket.Shutdown(SocketShutdown.Both);
                 klijentSoket.Dispose();
                 klijentSoket = null;
+                Debug.WriteLine(">>>> Ugasen klijentski soket.");
             }
         }
 
@@ -84,16 +80,43 @@ namespace Server
                     break;
 
                 case Operacija.ZapamtiNoviKurs:
-                    Controller.Instance.DodajKurs((Kurs)zahtev.ZahtevObjekat);
-                    odgovor.Poruka = "Kurs je uspesno sacuvan!";
+                    try
+                    {
+                        Controller.Instance.DodajKurs((Kurs)zahtev.ZahtevObjekat);
+                    }
+                    catch (SqlException)
+                    {
+                        odgovor.Poruka = "Sistem ne moze da zapamti kurs!";
+                        odgovor.UspesnaOperacija = false;
+                    }
                     break;
 
                 case Operacija.IzmeniKurs:
-                    Controller.Instance.IzmeniKurs((Kurs)zahtev.ZahtevObjekat);
+                    try
+                    {
+                        if(!Controller.Instance.IzmeniKurs((Kurs)zahtev.ZahtevObjekat))
+                        {
+                            odgovor.UspesnaOperacija = false;
+                            odgovor.Poruka = "Sistem ne moze da izmeni kurs!";
+                        }
+                        
+                    } catch(SqlException)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da izmeni kurs!";
+                    }
                     break;
 
                 case Operacija.NadjiKurseve:
-                    odgovor.OdgovorObjekat = Controller.Instance.NadjiKurseve((string)zahtev.ZahtevObjekat);
+                    List<Kurs> pronadjeniKursevi = Controller.Instance.NadjiKurseve((string)zahtev.ZahtevObjekat);
+                    if(pronadjeniKursevi.Count==0)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da pronadje kurseve!";
+                    } else
+                    {
+                        odgovor.OdgovorObjekat = pronadjeniKursevi;
+                    }
                     break;
 
                 case Operacija.UcitajListuKurseva:
@@ -101,15 +124,43 @@ namespace Server
                     break;
 
                 case Operacija.ZapamtiNovogPredavaca:
-                    Controller.Instance.SacuvajPredavaca((Predavac)zahtev.ZahtevObjekat);
+                    try
+                    {
+                        Controller.Instance.SacuvajPredavaca((Predavac)zahtev.ZahtevObjekat);
+                    } catch(SqlException)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da sacuva predavaca!";
+                    }
                     break;
 
                 case Operacija.IzmeniPredavaca:
-                    Controller.Instance.IzmeniPredavaca((Predavac)zahtev.ZahtevObjekat);
+                    try
+                    {
+                        if(!Controller.Instance.IzmeniPredavaca((Predavac)zahtev.ZahtevObjekat))
+                        {
+                            odgovor.UspesnaOperacija = false;
+                            odgovor.Poruka = "Sistem ne moze da izmeni predavaca!";
+                        }
+                        
+                    } catch(SqlException)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da izmeni predavaca!";
+                    }
                     break;
 
                 case Operacija.NadjiPredavace:
-                    odgovor.OdgovorObjekat = Controller.Instance.NadjiPredavace((string)zahtev.ZahtevObjekat);
+                    List<Predavac> pronadjeniPred = Controller.Instance.NadjiPredavace((string)zahtev.ZahtevObjekat);
+                    if (pronadjeniPred.Count == 0)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da pronadje predavace!";
+                    }
+                    else
+                    {
+                        odgovor.OdgovorObjekat = pronadjeniPred;
+                    }
                     break;
 
                 case Operacija.UcitajListuMesta:
@@ -117,15 +168,44 @@ namespace Server
                     break;
 
                 case Operacija.ZapamtiKorisnika:
-                    Controller.Instance.SacuvajKorisnika((Korisnik)zahtev.ZahtevObjekat);
+                    try
+                    {
+                        Controller.Instance.SacuvajKorisnika((Korisnik)zahtev.ZahtevObjekat);
+                    }
+                    catch (SqlException)
+                    {
+                        odgovor.Poruka = "Sistem ne moze da zapamti korisnika!";
+                        odgovor.UspesnaOperacija = false;
+                    }
                     break;
 
                 case Operacija.NadjiKorisnike:
-                    odgovor.OdgovorObjekat = Controller.Instance.NadjiKorisnika((string)zahtev.ZahtevObjekat);
+                    List<Korisnik> pronadjeniKorisnici = Controller.Instance.NadjiKorisnika((string)zahtev.ZahtevObjekat);
+                    if (pronadjeniKorisnici.Count == 0)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da pronadje korisnike!";
+                    }
+                    else
+                    {
+                        odgovor.OdgovorObjekat = pronadjeniKorisnici;
+                    }
                     break;
 
                 case Operacija.ObrisiKorisnika:
-                    Controller.Instance.ObrisiKorisnika((Korisnik)zahtev.ZahtevObjekat);
+                    try
+                    {
+                        if (!Controller.Instance.ObrisiKorisnika((Korisnik)zahtev.ZahtevObjekat))
+                        {
+                            odgovor.Poruka = "Sistem ne moze da obrise korisnika!";
+                            odgovor.UspesnaOperacija = false;
+                        }
+                    }
+                    catch (SqlException)
+                    {
+                        odgovor.Poruka = "Sistem ne moze da obrise korisnika!";
+                        odgovor.UspesnaOperacija = false;
+                    }
                     break;
 
                 case Operacija.UcitajListuKorisnika:
@@ -133,15 +213,36 @@ namespace Server
                     break;
 
                 case Operacija.ZapamtiFakturu:
-                    Controller.Instance.SacuvajFakturu((Faktura)zahtev.ZahtevObjekat);
+                    try
+                    {
+                        Controller.Instance.SacuvajFakturu((Faktura)zahtev.ZahtevObjekat);
+                    }
+                    catch (SqlException)
+                    {
+                        odgovor.Poruka = "Sistem ne moze da sacuva fakturu!";
+                        odgovor.UspesnaOperacija = false;
+                    }
                     break;
 
                 case Operacija.NadjiFakture:
-                    odgovor.OdgovorObjekat = Controller.Instance.NadjiFakture((string)zahtev.ZahtevObjekat);
+                    List<Faktura> pronadjeneFakture = Controller.Instance.NadjiFakture((string)zahtev.ZahtevObjekat);
+                    if (pronadjeneFakture.Count == 0)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da pronadje fakture!";
+                    }
+                    else
+                    {
+                        odgovor.OdgovorObjekat = pronadjeneFakture;
+                    }
                     break;
 
                 case Operacija.StornirajFakturu:
-                    Controller.Instance.StornirajFakturu((Faktura)zahtev.ZahtevObjekat);
+                    if(!Controller.Instance.StornirajFakturu((Faktura)zahtev.ZahtevObjekat))
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da stornira fakturu!";
+                    }
                     break;
 
                 case Operacija.Kraj:
@@ -170,6 +271,41 @@ namespace Server
 
                 case Operacija.UcitajSveNacinePlacanja:
                     odgovor.OdgovorObjekat = Controller.Instance.VratiSveNacinePlacanja();
+                    break;
+
+                case Operacija.UcitajKurs:
+                    odgovor.OdgovorObjekat = Controller.Instance.UcitajKurs((Kurs)zahtev.ZahtevObjekat);
+                    if(odgovor.OdgovorObjekat==null)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da ucita kurs!";
+                    }
+                    break;
+                case Operacija.UcitajPredavaca:
+                    odgovor.OdgovorObjekat = Controller.Instance.UcitajPredavaca((Predavac)zahtev.ZahtevObjekat);
+                    if (odgovor.OdgovorObjekat == null)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da ucita predavaca!";
+                    }
+                    break;
+
+                case Operacija.UcitajKorisnika:
+                    odgovor.OdgovorObjekat = Controller.Instance.UcitajKorisnika((Korisnik)zahtev.ZahtevObjekat);
+                    if (odgovor.OdgovorObjekat == null)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da ucita korisnika!";
+                    }
+                    break;
+
+                case Operacija.UcitajFakturu:
+                    odgovor.OdgovorObjekat = Controller.Instance.UcitajFakturu((Faktura)zahtev.ZahtevObjekat);
+                    if (odgovor.OdgovorObjekat == null)
+                    {
+                        odgovor.UspesnaOperacija = false;
+                        odgovor.Poruka = "Sistem ne moze da ucita fakturu!";
+                    }
                     break;
             }
             return odgovor;

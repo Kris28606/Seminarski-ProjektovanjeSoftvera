@@ -35,7 +35,6 @@ namespace KorisnickiInterfejs.Kurs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCSviKursevi));
             this.gbSviKursevi = new System.Windows.Forms.GroupBox();
             this.btnPrikazi = new System.Windows.Forms.Button();
-            this.btnNadji = new System.Windows.Forms.Button();
             this.txtPretraga = new System.Windows.Forms.TextBox();
             this.lblPretraga = new System.Windows.Forms.Label();
             this.dgvKursevi = new System.Windows.Forms.DataGridView();
@@ -48,14 +47,13 @@ namespace KorisnickiInterfejs.Kurs
             this.gbSviKursevi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gbSviKursevi.BackColor = System.Drawing.Color.SkyBlue;
             this.gbSviKursevi.Controls.Add(this.btnPrikazi);
-            this.gbSviKursevi.Controls.Add(this.btnNadji);
             this.gbSviKursevi.Controls.Add(this.txtPretraga);
             this.gbSviKursevi.Controls.Add(this.lblPretraga);
             this.gbSviKursevi.Controls.Add(this.dgvKursevi);
             this.gbSviKursevi.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbSviKursevi.Location = new System.Drawing.Point(47, 49);
             this.gbSviKursevi.Name = "gbSviKursevi";
-            this.gbSviKursevi.Size = new System.Drawing.Size(603, 468);
+            this.gbSviKursevi.Size = new System.Drawing.Size(603, 457);
             this.gbSviKursevi.TabIndex = 0;
             this.gbSviKursevi.TabStop = false;
             this.gbSviKursevi.Text = "Kursevi";
@@ -64,7 +62,7 @@ namespace KorisnickiInterfejs.Kurs
             // 
             this.btnPrikazi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnPrikazi.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnPrikazi.Location = new System.Drawing.Point(434, 81);
+            this.btnPrikazi.Location = new System.Drawing.Point(427, 53);
             this.btnPrikazi.Name = "btnPrikazi";
             this.btnPrikazi.Size = new System.Drawing.Size(98, 36);
             this.btnPrikazi.TabIndex = 4;
@@ -72,35 +70,24 @@ namespace KorisnickiInterfejs.Kurs
             this.btnPrikazi.UseVisualStyleBackColor = false;
             this.btnPrikazi.Click += new System.EventHandler(this.btnPrikazi_Click);
             // 
-            // btnNadji
-            // 
-            this.btnNadji.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnNadji.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnNadji.Location = new System.Drawing.Point(434, 33);
-            this.btnNadji.Name = "btnNadji";
-            this.btnNadji.Size = new System.Drawing.Size(98, 36);
-            this.btnNadji.TabIndex = 3;
-            this.btnNadji.Text = "Nadji";
-            this.btnNadji.UseVisualStyleBackColor = false;
-            this.btnNadji.Click += new System.EventHandler(this.btnNadji_Click);
-            // 
             // txtPretraga
             // 
             this.txtPretraga.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPretraga.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtPretraga.Location = new System.Drawing.Point(181, 40);
+            this.txtPretraga.Location = new System.Drawing.Point(167, 60);
             this.txtPretraga.Name = "txtPretraga";
             this.txtPretraga.Size = new System.Drawing.Size(226, 26);
             this.txtPretraga.TabIndex = 2;
             this.txtPretraga.Text = "Unesite kriterijum";
             this.txtPretraga.Click += new System.EventHandler(this.txtPretraga_Click);
+            this.txtPretraga.TextChanged += new System.EventHandler(this.txtPretraga_TextChanged);
             // 
             // lblPretraga
             // 
             this.lblPretraga.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPretraga.AutoSize = true;
             this.lblPretraga.Font = new System.Drawing.Font("Mongolian Baiti", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPretraga.Location = new System.Drawing.Point(86, 40);
+            this.lblPretraga.Location = new System.Drawing.Point(76, 60);
             this.lblPretraga.Name = "lblPretraga";
             this.lblPretraga.Size = new System.Drawing.Size(76, 20);
             this.lblPretraga.TabIndex = 1;
@@ -130,9 +117,10 @@ namespace KorisnickiInterfejs.Kurs
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvKursevi.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvKursevi.GridColor = System.Drawing.Color.Lavender;
-            this.dgvKursevi.Location = new System.Drawing.Point(47, 123);
+            this.dgvKursevi.Location = new System.Drawing.Point(47, 105);
             this.dgvKursevi.Name = "dgvKursevi";
             this.dgvKursevi.ReadOnly = true;
+            this.dgvKursevi.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvKursevi.Size = new System.Drawing.Size(513, 319);
             this.dgvKursevi.TabIndex = 0;
             // 
@@ -158,14 +146,12 @@ namespace KorisnickiInterfejs.Kurs
         private System.Windows.Forms.DataGridView dgvKursevi;
         private System.Windows.Forms.TextBox txtPretraga;
         private System.Windows.Forms.Label lblPretraga;
-        private System.Windows.Forms.Button btnNadji;
         private System.Windows.Forms.Button btnPrikazi;
 
         public GroupBox GbSviKursevi { get => gbSviKursevi; set => gbSviKursevi = value; }
         public DataGridView DgvKursevi { get => dgvKursevi; set => dgvKursevi = value; }
         public TextBox TxtPretraga { get => txtPretraga; set => txtPretraga = value; }
         public Label LblPretraga { get => lblPretraga; set => lblPretraga = value; }
-        public Button BtnNadji { get => btnNadji; set => btnNadji = value; }
         public Button BtnPrikazi { get => btnPrikazi; set => btnPrikazi = value; }
     }
 }

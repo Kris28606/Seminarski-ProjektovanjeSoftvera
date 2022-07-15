@@ -23,7 +23,7 @@ namespace SistemskeOperacije
 
                 repozitorijum.Commit();
             }
-            catch (Exception es)
+            catch (Exception)
             {
                 repozitorijum.RollBack();
                 throw;

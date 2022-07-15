@@ -37,7 +37,6 @@ namespace KorisnickiInterfejs.Predavac
             this.dgvPredavaci = new System.Windows.Forms.DataGridView();
             this.lblPretraga = new System.Windows.Forms.Label();
             this.txtPretraga = new System.Windows.Forms.TextBox();
-            this.btnNadji = new System.Windows.Forms.Button();
             this.btnPrikazi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPredavaci)).BeginInit();
             this.SuspendLayout();
@@ -88,7 +87,7 @@ namespace KorisnickiInterfejs.Predavac
             this.lblPretraga.BackColor = System.Drawing.Color.Transparent;
             this.lblPretraga.Font = new System.Drawing.Font("Mongolian Baiti", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPretraga.ForeColor = System.Drawing.Color.White;
-            this.lblPretraga.Location = new System.Drawing.Point(48, 74);
+            this.lblPretraga.Location = new System.Drawing.Point(87, 80);
             this.lblPretraga.Name = "lblPretraga";
             this.lblPretraga.Size = new System.Drawing.Size(76, 20);
             this.lblPretraga.TabIndex = 1;
@@ -99,34 +98,22 @@ namespace KorisnickiInterfejs.Predavac
             this.txtPretraga.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtPretraga.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPretraga.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.txtPretraga.Location = new System.Drawing.Point(130, 74);
+            this.txtPretraga.Location = new System.Drawing.Point(169, 80);
             this.txtPretraga.Name = "txtPretraga";
             this.txtPretraga.Size = new System.Drawing.Size(179, 26);
             this.txtPretraga.TabIndex = 2;
             this.txtPretraga.Text = "Unesite kriterijum";
             this.txtPretraga.Click += new System.EventHandler(this.txtPretraga_Click);
-            // 
-            // btnNadji
-            // 
-            this.btnNadji.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnNadji.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnNadji.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNadji.Location = new System.Drawing.Point(337, 74);
-            this.btnNadji.Name = "btnNadji";
-            this.btnNadji.Size = new System.Drawing.Size(75, 26);
-            this.btnNadji.TabIndex = 3;
-            this.btnNadji.Text = "Nadji";
-            this.btnNadji.UseVisualStyleBackColor = false;
-            this.btnNadji.Click += new System.EventHandler(this.btnNadji_Click);
+            this.txtPretraga.TextChanged += new System.EventHandler(this.txtPretraga_TextChanged);
             // 
             // btnPrikazi
             // 
             this.btnPrikazi.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnPrikazi.BackColor = System.Drawing.Color.Lime;
             this.btnPrikazi.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrikazi.Location = new System.Drawing.Point(486, 74);
+            this.btnPrikazi.Location = new System.Drawing.Point(414, 74);
             this.btnPrikazi.Name = "btnPrikazi";
-            this.btnPrikazi.Size = new System.Drawing.Size(75, 26);
+            this.btnPrikazi.Size = new System.Drawing.Size(94, 34);
             this.btnPrikazi.TabIndex = 4;
             this.btnPrikazi.Text = "Prikazi";
             this.btnPrikazi.UseVisualStyleBackColor = false;
@@ -139,7 +126,6 @@ namespace KorisnickiInterfejs.Predavac
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.btnPrikazi);
-            this.Controls.Add(this.btnNadji);
             this.Controls.Add(this.txtPretraga);
             this.Controls.Add(this.lblPretraga);
             this.Controls.Add(this.dgvPredavaci);
@@ -156,13 +142,11 @@ namespace KorisnickiInterfejs.Predavac
         private System.Windows.Forms.DataGridView dgvPredavaci;
         private System.Windows.Forms.Label lblPretraga;
         private System.Windows.Forms.TextBox txtPretraga;
-        private System.Windows.Forms.Button btnNadji;
         private System.Windows.Forms.Button btnPrikazi;
 
         public DataGridView DgvPredavaci { get => dgvPredavaci; set => dgvPredavaci = value; }
         public Label LblPretraga { get => lblPretraga; set => lblPretraga = value; }
         public TextBox TxtPretraga { get => txtPretraga; set => txtPretraga = value; }
-        public Button BtnNadji { get => btnNadji; set => btnNadji = value; }
         public Button BtnPrikazi { get => btnPrikazi; set => btnPrikazi = value; }
     }
 }

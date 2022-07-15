@@ -19,14 +19,14 @@ namespace KorisnickiInterfejs.Korisnik
             txtPretraga.Text = "";
         }
 
-        private void btnNadji_Click(object sender, EventArgs e)
-        {
-            controller.NadjiKorisnike();
-        }
-
         private void btnPrikazi_Click(object sender, EventArgs e)
         {
             controller.PrikaziKorisnika();
+        }
+
+        private void txtPretraga_TextChanged(object sender, EventArgs e)
+        {
+            controller.NadjiKorisnike();
         }
     }
 }

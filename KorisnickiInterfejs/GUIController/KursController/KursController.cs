@@ -20,7 +20,7 @@ namespace KorisnickiInterfejs.GUIController
             this.kurs = kurs;
         }
 
-        public void OcistiKontrole()
+        private void OcistiKontrole()
         {
             kurs.TxtPrice.BackColor = Color.White;
             kurs.TxtName.BackColor = Color.White;
@@ -53,7 +53,7 @@ namespace KorisnickiInterfejs.GUIController
                 {
                     DateTime datum = DateTime.ParseExact(kurs.TxtDate.Text, "dd.MM.yyyy. HH:mm", null);
                 }
-                catch (Exception es)
+                catch (Exception)
                 {
                     MessageBox.Show("Datum mora biti u formatu dd.MM.yyyy. HH:mm !");
                     kurs.TxtDate.BackColor = Color.SkyBlue;
@@ -68,6 +68,14 @@ namespace KorisnickiInterfejs.GUIController
             }
 
             return nijeDobro;
+        }
+
+        private void OcistiFormu()
+        {
+            kurs.TxtPrice.Text = "";
+            kurs.TxtName.Text = "";
+            kurs.TxtDate.Text = "";
+            kurs.TxtTime.Text = "";
         }
 
         public void DodajKurs()
@@ -88,15 +96,16 @@ namespace KorisnickiInterfejs.GUIController
             try
             {
                 Communication.Instance.PosaljiZahtevBezRezultata(Operacija.ZapamtiNoviKurs, k);
-                OcistiKontrole();
-                MessageBox.Show("Kurs je uspesno dodat!");
-            } catch(ServerCommunicationException se)
+                MessageBox.Show("Kurs je uspesno sacuvan!");
+                OcistiFormu();
+            } catch(ServerCommunicationException)
             {
                 throw;
             } 
             catch(SystemOperationException se)
             {
-                MessageBox.Show(se.ToString());
+                MessageBox.Show(se.Message);
+                OcistiFormu();
             }
             catch (Exception es)
             {
@@ -111,7 +120,7 @@ namespace KorisnickiInterfejs.GUIController
             {
                 Double.Parse(kurs.TxtPrice.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 kurs.TxtPrice.Text = "";
             }
@@ -123,7 +132,7 @@ namespace KorisnickiInterfejs.GUIController
             {
                 Int32.Parse(kurs.TxtTime.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 kurs.TxtTime.Text = "";
             }

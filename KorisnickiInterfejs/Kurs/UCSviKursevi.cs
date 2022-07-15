@@ -18,14 +18,14 @@ namespace KorisnickiInterfejs.Kurs
             controller.PrikaziKurs();
         }
 
-        private void btnNadji_Click(object sender, EventArgs e)
-        {
-            controller.NadjiKurseve();
-        }
-
         private void txtPretraga_Click(object sender, EventArgs e)
         {
             txtPretraga.Text = "";
+        }
+
+        private void txtPretraga_TextChanged(object sender, EventArgs e)
+        {
+            controller.NadjiKurseve();
         }
     }
 }

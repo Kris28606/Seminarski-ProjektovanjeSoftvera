@@ -41,18 +41,19 @@ namespace Repository.GenerickiRepozitorijum
             return (int)command.ExecuteScalar();
         }
 
-        public void Izmeni(IOpstiObjekat objekat)
+        public int Izmeni(IOpstiObjekat objekat)
         {
             SqlCommand command = broker.KreirajKomandu();
             command.CommandText = $"update {objekat.NazivTabele} set {objekat.UpdateUslov} where {objekat.Uslov}";
-            command.ExecuteNonQuery();
+            return command.ExecuteNonQuery();
+            
         }
 
-        public void Izbrisi(IOpstiObjekat objekat)
+        public int Izbrisi(IOpstiObjekat objekat)
         {
             SqlCommand command = broker.KreirajKomandu();
             command.CommandText = $"delete from {objekat.NazivTabele} where {objekat.Uslov}";
-            command.ExecuteNonQuery();
+            return command.ExecuteNonQuery();
         }
 
         public List<IOpstiObjekat> VratiSve(IOpstiObjekat objekat)
@@ -88,7 +89,7 @@ namespace Repository.GenerickiRepozitorijum
         public IOpstiObjekat VratiJedan(IOpstiObjekat objekat)
         {
             SqlCommand command = broker.KreirajKomandu();
-            command.CommandText = $"select * from {objekat.NazivTabele} where {objekat.Uslov}";
+            command.CommandText = $"select * from {objekat.NazivTabele} {objekat.JoinUslov} where {objekat.Uslov}";
             IOpstiObjekat rezultat;
             using (SqlDataReader reader = command.ExecuteReader())
             {

@@ -32,6 +32,11 @@ namespace KorisnickiInterfejs
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCKorisnik));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnIzbaci = new System.Windows.Forms.Button();
+            this.btnDodajKurs = new System.Windows.Forms.Button();
+            this.dgvKursevi = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbKurs = new System.Windows.Forms.ComboBox();
             this.cbMesto = new System.Windows.Forms.ComboBox();
             this.lblPlace = new System.Windows.Forms.Label();
             this.btnDodajKorisnika = new System.Windows.Forms.Button();
@@ -43,10 +48,7 @@ namespace KorisnickiInterfejs
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.lblAdrress = new System.Windows.Forms.Label();
             this.txtFirsName = new System.Windows.Forms.TextBox();
-            this.cbKurs = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dgvKursevi = new System.Windows.Forms.DataGridView();
-            this.btnDodajKurs = new System.Windows.Forms.Button();
+            this.lblKursGreska = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKursevi)).BeginInit();
             this.SuspendLayout();
@@ -55,6 +57,8 @@ namespace KorisnickiInterfejs
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupBox1.Controls.Add(this.lblKursGreska);
+            this.groupBox1.Controls.Add(this.btnIzbaci);
             this.groupBox1.Controls.Add(this.btnDodajKurs);
             this.groupBox1.Controls.Add(this.dgvKursevi);
             this.groupBox1.Controls.Add(this.label1);
@@ -77,6 +81,60 @@ namespace KorisnickiInterfejs
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dodaj novog korisnika";
+            // 
+            // btnIzbaci
+            // 
+            this.btnIzbaci.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnIzbaci.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnIzbaci.Location = new System.Drawing.Point(681, 67);
+            this.btnIzbaci.Name = "btnIzbaci";
+            this.btnIzbaci.Size = new System.Drawing.Size(94, 28);
+            this.btnIzbaci.TabIndex = 15;
+            this.btnIzbaci.Text = "Izbaci kurs";
+            this.btnIzbaci.UseVisualStyleBackColor = false;
+            this.btnIzbaci.Click += new System.EventHandler(this.btnIzbaci_Click);
+            // 
+            // btnDodajKurs
+            // 
+            this.btnDodajKurs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnDodajKurs.Location = new System.Drawing.Point(681, 24);
+            this.btnDodajKurs.Name = "btnDodajKurs";
+            this.btnDodajKurs.Size = new System.Drawing.Size(94, 28);
+            this.btnDodajKurs.TabIndex = 14;
+            this.btnDodajKurs.Text = "Dodaj kurs";
+            this.btnDodajKurs.UseVisualStyleBackColor = false;
+            this.btnDodajKurs.Click += new System.EventHandler(this.btnDodajKurs_Click);
+            // 
+            // dgvKursevi
+            // 
+            this.dgvKursevi.AllowUserToAddRows = false;
+            this.dgvKursevi.AllowUserToDeleteRows = false;
+            this.dgvKursevi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKursevi.Location = new System.Drawing.Point(360, 101);
+            this.dgvKursevi.Name = "dgvKursevi";
+            this.dgvKursevi.ReadOnly = true;
+            this.dgvKursevi.Size = new System.Drawing.Size(457, 211);
+            this.dgvKursevi.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(392, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Kurs:";
+            // 
+            // cbKurs
+            // 
+            this.cbKurs.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cbKurs.FormattingEnabled = true;
+            this.cbKurs.Location = new System.Drawing.Point(492, 54);
+            this.cbKurs.Name = "cbKurs";
+            this.cbKurs.Size = new System.Drawing.Size(163, 24);
+            this.cbKurs.TabIndex = 11;
             // 
             // cbMesto
             // 
@@ -194,47 +252,14 @@ namespace KorisnickiInterfejs
             this.txtFirsName.TabIndex = 4;
             this.txtFirsName.TextChanged += new System.EventHandler(this.txtFirsName_TextChanged);
             // 
-            // cbKurs
+            // lblKursGreska
             // 
-            this.cbKurs.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cbKurs.FormattingEnabled = true;
-            this.cbKurs.Location = new System.Drawing.Point(492, 54);
-            this.cbKurs.Name = "cbKurs";
-            this.cbKurs.Size = new System.Drawing.Size(163, 24);
-            this.cbKurs.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(392, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Kurs:";
-            // 
-            // dgvKursevi
-            // 
-            this.dgvKursevi.AllowUserToAddRows = false;
-            this.dgvKursevi.AllowUserToDeleteRows = false;
-            this.dgvKursevi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvKursevi.Location = new System.Drawing.Point(360, 101);
-            this.dgvKursevi.Name = "dgvKursevi";
-            this.dgvKursevi.ReadOnly = true;
-            this.dgvKursevi.Size = new System.Drawing.Size(457, 211);
-            this.dgvKursevi.TabIndex = 13;
-            // 
-            // btnDodajKurs
-            // 
-            this.btnDodajKurs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btnDodajKurs.Location = new System.Drawing.Point(682, 54);
-            this.btnDodajKurs.Name = "btnDodajKurs";
-            this.btnDodajKurs.Size = new System.Drawing.Size(94, 28);
-            this.btnDodajKurs.TabIndex = 14;
-            this.btnDodajKurs.Text = "Dodaj kurs";
-            this.btnDodajKurs.UseVisualStyleBackColor = false;
-            this.btnDodajKurs.Click += new System.EventHandler(this.btnDodajKurs_Click);
+            this.lblKursGreska.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblKursGreska.AutoSize = true;
+            this.lblKursGreska.Location = new System.Drawing.Point(415, 82);
+            this.lblKursGreska.Name = "lblKursGreska";
+            this.lblKursGreska.Size = new System.Drawing.Size(0, 16);
+            this.lblKursGreska.TabIndex = 16;
             // 
             // UCKorisnik
             // 
@@ -270,6 +295,8 @@ namespace KorisnickiInterfejs
         private System.Windows.Forms.DataGridView dgvKursevi;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbKurs;
+        private Button btnIzbaci;
+        private Label lblKursGreska;
 
         public GroupBox GroupBox1 { get => groupBox1; set => groupBox1 = value; }
         public ComboBox CbMesto { get => cbMesto; set => cbMesto = value; }
@@ -287,5 +314,7 @@ namespace KorisnickiInterfejs
         public DataGridView DgvKursevi { get => dgvKursevi; set => dgvKursevi = value; }
         public Label Label1 { get => label1; set => label1 = value; }
         public ComboBox CbKurs { get => cbKurs; set => cbKurs = value; }
+        public Button BtnIzbaci { get => btnIzbaci; set => btnIzbaci = value; }
+        public Label LblKursGreska { get => lblKursGreska; set => lblKursGreska = value; }
     }
 }

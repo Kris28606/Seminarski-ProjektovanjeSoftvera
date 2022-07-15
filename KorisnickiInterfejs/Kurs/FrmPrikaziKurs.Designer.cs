@@ -156,7 +156,7 @@ namespace KorisnickiInterfejs.Kurs
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.lblDate);
             this.Name = "FrmPrikaziKurs";
-            this.Text = "FrmPrikaziKurs";
+            this.Text = "Kurs";
             this.ResumeLayout(false);
             this.PerformLayout();
 
